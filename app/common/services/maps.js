@@ -5,13 +5,15 @@ module.exports = [
     'Leaflet',
     'leafletData',
     '_',
+    '$filter',
 function (
     $q,
     ConfigEndpoint,
     Util,
     L,
     LData,
-    _
+    _,
+    $filter
 ) {
 
     var layers = {
@@ -54,11 +56,17 @@ function (
         onEachFeature: function (feature, layer) {
             var description = feature.properties.description || '',
                 title = feature.properties.title || feature.properties.id;
+
             layer.bindPopup(
-                '<strong><a href="/posts/' + feature.properties.id + '">' +
-                title +
-                '</a></strong>' +
-                '<p>' + description + '</p>'
+                '<article class="postcard">' +
+                    '<div class="post-band" style="background-color: #A51A1A;"></div>' +
+                    '<div class="postcard-body">' +
+                        '<h1 class="postcard-title"><a href="/posts/' + feature.properties.id + '">' + title + '</a></h1>' +
+                        '<div class="postcard-field">' +
+                        '<p>' + $filter('truncate')(description, 150, '...', true) + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</article>'
             );
         }
     };
@@ -72,9 +80,15 @@ function (
             }
             return this.maps[name];
         },
+        destroyMap: function (name) {
+            if (this.maps[name]) {
+                delete this.maps[name];
+            }
+        },
         getInitialScope: function () {
             return {
                 defaults: {
+                    zoomControlPosition: 'bottomright',
                     scrollWheelZoom: false
                 },
                 center: { // Default to centered on Nairobi
