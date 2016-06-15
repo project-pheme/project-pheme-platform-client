@@ -3,11 +3,13 @@ module.exports = [
     '$rootScope',
     'Util',
     '_',
+    '$http',
 function (
     $resource,
     $rootScope,
     Util,
-    _
+    _,
+    $http
 ) {
 
     var PostEndpoint = $resource(Util.apiUrl('/posts/:id/:extra'), {
@@ -54,8 +56,16 @@ function (
             url: Util.apiUrl('/posts/:id/collections'),
             isArray: true
         }
-
     });
+
+    PostEndpoint.export = function (filters) {
+        var config =  {
+            params: filters,
+            paramSerializer: '$httpParamSerializerJQLike'
+        };
+
+        return $http.get(Util.apiUrl('/posts/export'), config);
+    };
 
     $rootScope.$on('event:authentication:logout:succeeded', function () {
         PostEndpoint.query();

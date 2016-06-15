@@ -18,6 +18,7 @@ module.exports = [
     'leafletData',
     '_',
     'Notify',
+    'moment',
 function (
     $scope,
     $rootScope,
@@ -37,9 +38,12 @@ function (
     L,
     leafletData,
     _,
-    Notify
+    Notify,
+    moment
 ) {
+    $rootScope.setLayout('layout-c');
     $scope.post = post;
+    $scope.hasPermission = $rootScope.hasPermission;
 
     $scope.mapDataLoaded = false;
     $scope.publishedFor = function () {
@@ -82,6 +86,7 @@ function (
 
         FormEndpoint.get({id: $scope.post.form.id}, function (form) {
             $scope.form_name = form.name;
+            $scope.form_description = form.description;
 
             // Set page title to '{form.name} Details' if a post title isn't provided.
             if (!$scope.post.title) {
@@ -202,25 +207,6 @@ function (
         }
     });
 
-    $scope.deletePost = function () {
-        $translate('notify.post.destroy_confirm').then(function (message) {
-            Notify.showConfirm(message).then(function () {
-                PostEndpoint.delete({ id: $scope.post.id }).$promise.then(function () {
-                    $translate(
-                        'notify.post.destroy_success',
-                        {
-                            name: $scope.post.title
-                        }).then(function (message) {
-                            Notify.showNotificationSlider(message);
-                            $location.path('/');
-                        });
-                }, function (errorResponse) {
-                    Notify.showApiErrors(errorResponse);
-                });
-            });
-        });
-    };
-
     $scope.toggleCompletedStage = function (stage) {
         // @todo how to validate this before saving
         if (_.includes($scope.post.completed_stages, stage.id)) {
@@ -231,13 +217,10 @@ function (
 
         PostEndpoint.update($scope.post).$promise
             .then(function () {
-                $translate('notify.post.stage_save_success', {stage: stage.label})
-                    .then(function (message) {
-                        Notify.showNotificationSlider(message);
-                        stage.completed = !stage.completed;
-                    });
+                Notify.notify('notify.post.stage_save_success', {stage: stage.label});
+                stage.completed = !stage.completed;
             }, function (errorResponse) {
-                Notify.showApiErrors(errorResponse);
+                Notify.apiErrors(errorResponse);
             });
     };
 
@@ -254,7 +237,7 @@ function (
         });
 
         if (errors.length) {
-            Notify.showAlerts(errors);
+            Notify.errorsPretranslated(errors); // todo WTF
             return;
         }
 
@@ -266,12 +249,22 @@ function (
             var message = post.status === 'draft' ? 'notify.post.set_draft' : 'notify.post.publish_success';
             var role = message === 'draft' ? 'draft' : (_.isEmpty(post.published_to) ? 'everyone' : post.published_to.join(', '));
 
-            $translate(message, {role: role})
-            .then(function (message) {
-                Notify.showNotificationSlider(message);
-            });
+            Notify.notify(message, {role: role});
         }, function (errorResponse) {
-            Notify.showApiErrors(errorResponse);
+            Notify.apiErrors(errorResponse);
         });
     };
+
+    function formatDate() {
+        var created = moment($scope.post.update || $scope.post.created),
+            now = moment();
+
+        if (now.isSame(created, 'day')) {
+            $scope.displayTime = created.fromNow();
+        } else {
+            $scope.displayTime = created.format('LLL');
+        }
+    }
+
+    formatDate();
 }];

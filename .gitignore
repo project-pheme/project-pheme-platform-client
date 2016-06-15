@@ -8,3 +8,12 @@ test/coverage/
 build/*
 .DS_Store
 server/www/locales/
+*.aes
+*.swp
+*.swo
+deployment.env
+vault.txt
+*.swo
+*.swp
+*.svg
+server/www/img/icons/
