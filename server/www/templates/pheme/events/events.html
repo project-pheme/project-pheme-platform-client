@@ -1,0 +1,58 @@
+<div>
+    <layout-class layout="b"></layout-class>
+    <div class="mode-context init" dropdown>
+        <header class="mode-context-header">
+            <h1 class="mode-context-title" translate>pheme.events</h1>
+        </header>
+
+        <span class="mode-context-trigger" dropdown-toggle>
+            <svg class="iconic">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-bottom"></use>
+            </svg>
+            <span class="label hidden" translate>app.show_more_less</span>
+        </span>
+    </div>
+    <main role="main">
+    	<!-- toolbar -->
+        <div class="toolbar">
+            <div class="fab">
+                <a ng-href="/pheme/events/create" type="button" class="button button-alpha button-fab">
+                    <svg class="iconic">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#plus"></use>
+                    </svg>
+                    <span class="hidden" translate>pheme.add_events</span>
+                </a>
+            </div>
+        </div>
+        <!-- end toolbar -->
+        <!-- TODO: plug it correctly -->
+        <div class="main-col">
+     		<div class="listing card" ng-class="{'toolbar-active': selectedEvents.length}">
+                <div class="alert" ng-hide="events.length">
+                    <p ng-hide="events.length"><em translate>pheme.empty.events</em></p>
+                </div>
+
+                <div id="pheme-{{event.id}}" class="listing-item" ng-repeat="event in events | orderBy:'category_id'" ng-class="{ 'warning': isToggled(event) }" ng-click="toggleEvent(event)">
+
+                    <div class="listing-item-select">
+                        <input type="checkbox" value="{{event.id}}" ng-checked="isToggled(event)">
+                    </div>
+
+                    <div class="listing-item-primary">
+                        <h2 class="listing-item-title"><!--<a ng-href="/settings/categories/{{category.id}}">-->{{event.name}}<!--</a>--></h2>
+                        <p class="listing-item-secondary">{{event.description}}</p>
+                    </div>
+
+                </div>
+                <listing-toolbar entities="events" selected-set="selectedEvents">
+                    <button type="button" class="button-destructive" ng-disabled="!selectedEvents.length" ng-click="alert('Does nothing')">
+                        <svg class="iconic">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#trash"></use>
+                        </svg>
+                        <span class="button-label hidden">nav.delete</span>
+                    </button>
+                </listing-toolbar>
+           </div>
+     	</div>
+    </main>
+</div>

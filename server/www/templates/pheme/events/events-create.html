@@ -1,0 +1,62 @@
+<div>
+    <div class="mode-context init" dropdown>
+        <header class="mode-context-header">
+            <h1 class="mode-context-title" translate>pheme.add_event</h1>
+        </header>
+
+        <span class="mode-context-trigger" dropdown-toggle>
+            <svg class="iconic">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-bottom"></use>
+            </svg>
+            <span class="label hidden" translate>app.show_more_less</span>
+        </span>
+    </div>
+    <main role="main">
+
+        <!--it was: <div custom-categorys-editor class="main-col">-->
+        <div class="main-col">
+
+            <!-- toolbar -->
+            <div class="toolbar">
+                <div class="button-group">
+                    <button type="button" class="button-flat" ng-click="cancel()" translate>app.cancel</button>
+                    <button class="button-alpha" type="button" ng-click="saveEvent(event)" type="submit" ng-disabled="form.$invalid" translate>
+                        <div class="loading" ng-show="saving">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                        </div>
+                        <span ng-hide="saving" translate>app.save</span>
+                    </button>
+                </div>
+            </div>
+            <!-- end toolbar -->
+
+            <form>
+                <div class="form-sheet">
+                   <div class="form-field title">
+                       <label class="hidden" translate>pheme.event.name</label>
+                       <input type="text" placeholder="{{'pheme.event.name' | translate}}" ng-minlength="3" ng-maxlength="150" ng-model="event.name" required>
+                   </div>
+
+                    <div class="form-field form-field-adapt">
+                        <label translate>pheme.event.description</label>
+                        <p translate>pheme.event.description.instructions</p>
+                        <textarea name="description" data-min-rows='1' rows='1' ng-maxlength="150" ng-model="event.description"></textarea>
+                    </div>
+
+                    <!-- NOTE: this may have to be extended eventually to several keywords (combination of several searches) -->
+                    <div class="form-field form-field-adapt">
+                        <label translate>pheme.event.keywords</label>
+                        <p translate>pheme.event.keywords.instructions</p>
+                        <input type="text" placeholder="{{'pheme.event.keywords' | translate}}" ng-minlength="3" ng-maxlength="255" ng-model="event.keywords"></textarea>
+                    </div>                    
+
+                    <!--<color-picker color-container="event"></color-picker>-->
+
+                </div>
+            </form>
+
+        </div>
+    </main>
+</div>
