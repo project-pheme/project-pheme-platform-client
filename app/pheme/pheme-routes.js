@@ -13,6 +13,10 @@ function (
         controller: require('./controllers/pheme-events-create-controller.js'),
         templateUrl: 'templates/pheme/events/events-create.html'
     })
+    .when('/pheme/posts/:type/:view?', {
+        controller: require('./controllers/pheme-post-views-controller.js'),
+        templateUrl: 'templates/posts/views/main.html'
+    })
     ;
 
 }];

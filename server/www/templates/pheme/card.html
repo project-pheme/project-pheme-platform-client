@@ -1,0 +1,30 @@
+<article class="postcard">
+    <div class="post-band" todo-style="background-color: #A51A1A;"></div>
+    <div class="listing-item-select" ng-if="canSelect">
+        <input type="checkbox" checklist-value="post.id" checklist-model="selectedPosts">
+    </div>
+    <div class="postcard-body">
+        <h1 class="postcard-title"><a ng-href="/posts/{{post.id}}"><b>Theme</b> {{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}}</a></h1>
+
+        <!--<post-metadata post="post" hide-date-this-week="true"></post-metadata>-->
+        <!-- TODO: override post-metadata just like we overrid post-card? -->
+        <p><i>Started:</i> {{ post.values['theme-start-date'][0] }}</p>
+        <p><i>Last activity:</i> {{ post.values['theme-last-activity'][0] }}</p>
+        <p><i>Size:</i> {{ post.values['theme-size'][0] }} <i>tweets</i><p>
+        <p><i>Speed:</i> {{ post.values['theme-average-activity'][0] }} <i>tweets/hour</i><p>
+
+        <b>Representative tweet</b>
+        <p>{{ post.values['theme-featured-tweet'][0] }}</p>
+
+        <!--<post-preview-media post="post"></post-preview-media>-->
+        <!-- <img src="http://lorempixel.com/400/300/" class="postcard-image"> -->
+
+        <!--
+        <div class="postcard-field">
+            <p>{{ post.content }}</p>
+        </div>
+        -->
+    </div> <!-- /postcard-body -->
+
+    <!--<post-actions post="post"></post-actions>-->
+</article>
