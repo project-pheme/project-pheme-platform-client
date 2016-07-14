@@ -11,6 +11,9 @@ function PostCardDirective() {
             selectedPosts: '=',
             shortContent: '@'
         },
+        // debug
+        controller: function() {console.log("postcard scope"); console.log(this);},
+        // debug
         templateUrl: 'templates/posts/card.html',
         link: function ($scope) {
             activate();
