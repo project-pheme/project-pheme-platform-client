@@ -1,7 +1,7 @@
 module.exports = PhemePostViewsController;
 
-PhemePostViewsController.$inject = ['$scope', '$controller', '$translate', '$routeParams', 'PostFilters'];
-function PhemePostViewsController($scope, $controller, $translate, $routeParams, PostFilters) {
+PhemePostViewsController.$inject = ['$scope', '$controller', '$translate', '$routeParams', 'PostFilters', 'PhemePostViewService'];
+function PhemePostViewsController($scope, $controller, $translate, $routeParams, PostFilters, PhemePostViewService) {
 
 	// ---
 	// FIXME: this should actually reuse the controller without  copying its code
@@ -28,6 +28,8 @@ function PhemePostViewsController($scope, $controller, $translate, $routeParams,
         $scope.$emit('setPageTitle', title);
     });
 
+    // Set the post type being looked at, share with deep-nested directives via service
     $scope.postType = $routeParams.type;
+    PhemePostViewService.setPostType($routeParams.type);
 
 }
