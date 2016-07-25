@@ -13,8 +13,17 @@
         <p><i>Size:</i> {{ post.values['theme-size'][0] }} <i>tweets</i><p>
         <p><i>Speed:</i> {{ post.values['theme-average-activity'][0] }} <i>tweets/hour</i><p>
 
-        <b>Representative tweet</b>
-        <p>{{ post.values['theme-featured-tweet'][0] }}</p>
+        <!-- TODO: this whole thing should be in its own directive probably -->
+        <div ng-if="post.featured_tweet">
+        <b>Featured tweet</b>
+        <p><img ng-src="{{ post.featured_tweet.user.profile_image_url }}" target="_blank" width="64" height="64">
+           <a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">
+             <i>@{{ post.featured_tweet.user.user_screen_name }}</i>
+            </a>
+            {{ post.featured_tweet.user.user_description }}</p>
+        <p ng-bind="post.featured_tweet.text" linkify="twitter"></p>
+        <p><i>{{ post.featured_tweet.date}}</i></p>
+        </div>
 
         <!--<post-preview-media post="post"></post-preview-media>-->
         <!-- <img src="http://lorempixel.com/400/300/" class="postcard-image"> -->
