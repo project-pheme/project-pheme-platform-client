@@ -57,6 +57,8 @@
 
         <script src="/js/bundle.js"></script>
 
+        <!--
+        Doorbell
         <script type="text/javascript">
             if (window.ushahidi && window.ushahidi.doorbellEnabled) {
                 window.doorbellOptions = {
@@ -83,6 +85,7 @@
                 }(document, 'script'));
             }
         </script>
+        -->
         <!--
         Intercom integration
         -->
@@ -105,6 +108,7 @@
                 }
               }
 
+              /* intercom
               per_app_intercom_widget = 'https://widget.intercom.io/widget/' + getAppId();
               var script_tag = document.createElement('script');
               script_tag.type = 'text/javascript';
@@ -113,9 +117,10 @@
 
               var existing_script = document.getElementsByTagName('script')[0];
               existing_script.parentNode.insertBefore(script_tag, existing_script);
+              */
             })();
         </script>
-        <ng-include src="'templates/partials/intercom-system.html'"></ng-include>
+        <!--<ng-include src="'templates/partials/intercom-system.html'"></ng-include>-->
 
         <script>
             if (window.ushahidi && window.ushahidi.gaEnabled) {

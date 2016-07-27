@@ -17,6 +17,18 @@ function (
         controller: require('./controllers/pheme-post-views-controller.js'),
         templateUrl: 'templates/posts/views/main.html'
     })
+    .when('/pheme/themes/:id', {
+        controller: require('./controllers/pheme-theme-detail-controller.js'),
+        templateUrl: 'templates/pheme/theme-detail.html',
+        resolve: {
+            post: ['$route', 'PostEndpoint', function ($route, PostEndpoint) {
+                return PostEndpoint.get({ id: $route.current.params.id }).$promise;
+            }],
+            theme: ['$route', 'PhemeThemesEndpoint', function ($route, PhemeThemesEndpoint) {
+                return PhemeThemesEndpoint.get({ id: $route.current.params.id }).$promise;
+            }]
+        }
+    })
     ;
 
 }];

@@ -16,12 +16,14 @@
     	<!-- toolbar -->
         <div class="toolbar">
             <div class="fab">
+                <!--
                 <a ng-href="/pheme/events/create" type="button" class="button button-alpha button-fab">
                     <svg class="iconic">
                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#plus"></use>
                     </svg>
                     <span class="hidden" translate>pheme.add_events</span>
                 </a>
+                -->
             </div>
         </div>
         <!-- end toolbar -->
@@ -44,6 +46,7 @@
                     </div>
 
                 </div>
+
                 <listing-toolbar entities="events" selected-set="selectedEvents">
                     <button type="button" class="button-destructive" ng-disabled="!selectedEvents.length" ng-click="alert('Does nothing')">
                         <svg class="iconic">
@@ -53,6 +56,7 @@
                     </button>
                 </listing-toolbar>
            </div>
+           <div><a href="/pheme/events/create">Add an event</a></div>
      	</div>
     </main>
 </div>
