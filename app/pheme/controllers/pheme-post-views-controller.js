@@ -3,11 +3,13 @@ module.exports = PhemePostViewsController;
 PhemePostViewsController.$inject = ['$scope', '$controller', '$translate', '$routeParams', 'PostFilters', 'PhemePostViewService'];
 function PhemePostViewsController($scope, $controller, $translate, $routeParams, PostFilters, PhemePostViewService) {
 
-	// ---
-	// FIXME: this should actually reuse the controller without  copying its code
-	//   something like: angular.extend(this, $controller('PostViewsController', { $scope: $scope }));
-	// Set view based out route
+	// --- copied from original controller
+    // Set view based out route
     $scope.currentView = $routeParams.view;
+    $scope.postType = $routeParams.type;
+
+    // Change mode (navigation)
+    $scope.$emit('event:mode:change', $scope.postType);
 
     // Set the page title
     $translate('post.posts').then(function (title) {
@@ -29,7 +31,6 @@ function PhemePostViewsController($scope, $controller, $translate, $routeParams,
     });
 
     // Set the post type being looked at, share with deep-nested directives via service
-    $scope.postType = $routeParams.type;
-    PhemePostViewService.setPostType($routeParams.type);
+    PhemePostViewService.setPostType($scope.postType);
 
 }

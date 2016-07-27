@@ -3,6 +3,7 @@ require('angular-linkify');
 angular.module('ushahidi.pheme', ['linkify'])
 
 .service('PhemeEventsEndpoint', require('./services/endpoints/events.js'))
+.service('PhemeThemesEndpoint', require('./services/endpoints/themes.js'))
 
 .config(['$provide', function($provide) {
 	$provide.factory('PhemePostViewService', function() {
@@ -15,6 +16,16 @@ angular.module('ushahidi.pheme', ['linkify'])
 			}
 		}
 	});
+	//
+	$provide.decorator('modeBarDirective', [
+		'$delegate',
+		function($delegate) {
+			var directive = $delegate[0];
+			//
+			directive.templateUrl = 'templates/pheme/mode-bar.html';
+			return $delegate;
+		}
+	]);
 	//
 	$provide.decorator('postCardDirective', [
 		'$delegate',

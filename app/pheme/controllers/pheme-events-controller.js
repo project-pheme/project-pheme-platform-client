@@ -29,8 +29,8 @@ function (
         $scope.title = title;
         $scope.$emit('setPageTitle', title);
     });
-    // Change mode
-    $scope.$emit('event:mode:change', $scope.currentView);
+    // Change mode (navigation)
+    $scope.$emit('event:mode:change', 'events');
 
     // Pull events from the server
     $scope.refreshView = function () {
