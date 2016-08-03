@@ -36,46 +36,35 @@
           {{post.title}}
         </h1>
 
-        <post-metadata post="post"></post-metadata>
-
         <nav class="tabs-menu" data-tabs="tasks-tabs" data-tabs-hash>
           <ul>
-            <li class='active'><a>Overview</a></li>
-            <li><a>Map</a></li>
+            <li ng-class="{'active': visibleTab == 'threads'}">
+              <a ng-click="setVisibleTab('threads')">Threads</a>
+            </li>
+            <li ng-class="{'active': visibleTab == 'pubs'}">
+              <a ng-click="setVisibleTab('pubs')">Publications</a>
+            </li>
+            <li ng-class="{'active': visibleTab == 'images'}">
+              <a ng-click="setVisibleTab('images')">Images</a>
+            </li>
+            <li ng-class="{'active': visibleTab == 'places'}">
+              <a ng-click="setVisibleTab('places')">Places</a>
+            </li>
           </ul>
         </nav>
         <div class="tasks-tabs">
-          <!-- media
-          <div
-            ng-repeat="(key,value) in post.values"
-            ng-if="form_attributes[key] && showType(form_attributes[key].type)"
-            ng-show="form_attributes[key].form_stage_id == visibleStage"
-            class="postcard-field"
-            >
-
-            <post-media-value
-              ng-if="form_attributes[key].type === 'media'"
-              label="{{form_attributes[key].label}}"
-              media-id="value"></post-media-value>
-          </div>  -->
-          <!-- content
-          <div
-            ng-if="post.content"
-            class="postcard-field">
-            <p sd-model-to-html="post.content"></p>
-          </div> -->
-          <!-- categories -->
+          <!-- tags (categories) -->
           <div
             ng-if="!!post.tags.length"
             class="postcard-field"
             >
-            <h2 class="form-label" translate>post.modify.form.categories</h2>
+            <h2 class="form-label" translate>Event</h2>
             <p ng-repeat="category in post.tags">
               {{category.tag}}
             </p>
           </div>
           <!-- values -->
-          <h2 class="form-label">Information</h2>
+          <h2 class="form-label">Overview</h2>
 
             <p><i>Started:</i> {{ post.values['theme-start-date'][0] }}</p>
             <p><i>Last activity:</i> {{ post.values['theme-last-activity'][0] }}</p>
@@ -85,43 +74,51 @@
             <p><i>Number of articles:</i> {{ post.values['theme-article-count'][0] }}<p>
             <p><i>Presence of verified authors:</i> {{ post.values['theme-has-verified-authors'][0] }}<p>
 
-          <h2 class="form-label">Threads</h2>
-          <div ng-repeat="thread in theme.threads">
-            <div ng-if="thread.featured_tweet">
-            <b>Featured tweet</b>
-            <p><img ng-src="{{ thread.featured_tweet.user.profile_image_url }}" target="_blank" width="64" height="64">
-               <a ng-href="https://twitter.com/{{ thread.featured_tweet.user.user_screen_name }}">
-                 <i>@{{ thread.featured_tweet.user.user_screen_name }}</i>
-                </a>
-                {{ thread.featured_tweet.user.user_description }}</p>
-            <p ng-bind="thread.featured_tweet.text" linkify="twitter"></p>
-            <p><i>{{ thread.featured_tweet.date}}</i></p>
+          <div ng-show="visibleTab == 'threads'">
+            <h2 class="form-label">Threads</h2>
+            <div ng-repeat="thread in theme.threads">
+              <div ng-if="thread.featured_tweet">
+              <b>Featured tweet</b>
+              <p><img ng-src="{{ thread.featured_tweet.user.profile_image_url }}" target="_blank" width="64" height="64">
+                 <a ng-href="https://twitter.com/{{ thread.featured_tweet.user.user_screen_name }}">
+                   <i>@{{ thread.featured_tweet.user.user_screen_name }}</i>
+                  </a>
+                  {{ thread.featured_tweet.user.user_description }}</p>
+              <p ng-bind="thread.featured_tweet.text" linkify="twitter"></p>
+              <p><i>{{ thread.featured_tweet.date}}</i></p>
+              </div>
             </div>
           </div>
 
-          <h2 class="form-label">Related articles</h2>
-          <div ng-repeat="article in theme.articles">
-            <a ng-href="{{ article.url }}">(link)</a> <span ng-bind="article.text" linkify="twitter"></span>
-          </div>
-
-          <h2 class="form-label">Images</h2>
-          <div ng-repeat="img in theme.images">
-            <img ng-src="{{ img.imgUrl }}" width="100" height="100"> <span ng-bind="img.text" linkify="twitter"></span>
-          </div>
-
-          <h2 class="form-label">Locations</h2>
-          <!-- maps
-          <div
-            ng-if="mapDataLoaded"
-            ng-show="visibleStage == stages[0].id || visibleStage == 'post'"
-            class="postcard-field"
-            >
-            <h2 ng-if="mapDataLoaded" class="form-label" translate>post.location</h2>
-            <div ng-if="mapDataLoaded">
-              <leaflet id="post-map" class="map" defaults="defaults" geojson="geojson" center="center" layers="layers"></leaflet>
+          <div ng-show="visibleTab == 'pubs'">
+            <h2 class="form-label">Linked publications</h2>
+            <div ng-repeat="article in theme.articles">
+              <a ng-href="{{ article.url }}">(link)</a> <span ng-bind="article.text" linkify="twitter"></span>
             </div>
           </div>
-          -->
+
+          <div ng-show="visibleTab == 'images'">
+            <h2 class="form-label">Images</h2>
+            <div ng-repeat="img in theme.images">
+              <img ng-src="{{ img.imgUrl }}" width="100" height="100"> <span ng-bind="img.text" linkify="twitter"></span>
+            </div>
+          </div>
+
+          <div ng-show="visibleTab == 'places'">
+            <h2 class="form-label">Places</h2>
+            <!-- maps
+            <div
+              ng-if="mapDataLoaded"
+              ng-show="visibleStage == stages[0].id || visibleStage == 'post'"
+              class="postcard-field"
+              >
+              <h2 ng-if="mapDataLoaded" class="form-label" translate>post.location</h2>
+              <div ng-if="mapDataLoaded">
+                <leaflet id="post-map" class="map" defaults="defaults" geojson="geojson" center="center" layers="layers"></leaflet>
+              </div>
+            </div>
+            -->
+          </div>
         </div>
       </div>
 
