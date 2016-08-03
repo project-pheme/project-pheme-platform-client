@@ -20,6 +20,9 @@ function PhemeThemeDetailController($scope, $controller, $translate, $routeParam
 
     $scope.post.featured_tweet = JSON.parse($scope.post.values['theme-featured-tweet'][0]);
 
-    console.log($scope);
-    
+    $scope.visibleTab = 'threads';
+    $scope.setVisibleTab = function (tabId) {
+        $scope.visibleTab = tabId;
+    };
+
 }
