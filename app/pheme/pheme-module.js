@@ -49,6 +49,14 @@ angular.module('ushahidi.pheme', ['linkify'])
 			return $delegate;
 		}
 	]);
+	// disable the no posts slider
+	$provide.decorator('PostViewService', [
+		'$delegate',
+		function($delegate) {
+			$delegate.showNoPostsSlider = function() {};
+			return $delegate;
+		}
+	]);
 }])
 
 .config(require('./pheme-routes.js'));
