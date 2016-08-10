@@ -100,7 +100,7 @@
           <div ng-show="visibleTab == 'images'">
             <h2 class="form-label">Images</h2>
             <div ng-repeat="img in theme.images">
-              <img ng-src="{{ img.imgUrl }}" width="100" height="100"> <span ng-bind="img.text" linkify="twitter"></span>
+              <img ng-src="{{ img.imgUrl }}" width="100" height="100"> {{ img.count }} times , first seen {{ img.date }}
             </div>
           </div>
 
