@@ -4,39 +4,47 @@
         <input type="checkbox" checklist-value="post.id" checklist-model="selectedPosts">
     </div>
     <div class="postcard-body">
-        <h1 class="postcard-title"><a ng-href="/pheme/themes/{{post.id}}"><b>Theme</b> {{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}}</a></h1>
+      <header class="postcard-header"> 
+        <h1 class="postcard-title"><a href="/pheme/themes/{{post.id}}"><b>Theme</b> {{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}} </a></h1> 
+      </header> 
 
-        <!--<post-metadata post="post" hide-date-this-week="true"></post-metadata>-->
-        <!-- TODO: override post-metadata just like we overrid post-card? -->
-        <p><i>Started:</i> {{ post.values['theme-start-date'][0] }}</p>
-        <p><i>Last activity:</i> {{ post.values['theme-last-activity'][0] }}</p>
-        <p><i>Size:</i> {{ post.values['theme-size'][0] }} <i>tweets</i><p>
-        <p><i>Speed:</i> {{ post.values['theme-average-activity'][0] }} <i>tweets/hour</i><p>
-        <p><i>Controversiality:</i> {{ post.values['theme-controversiality'][0] }}<p>
-        <p><i>Number of images:</i> {{ post.values['theme-img-count'][0] }}<p>
-        <p><i>Number of articles:</i> {{ post.values['theme-pub-count'][0] }}<p>
-        <p><i>Presence of verified authors:</i> {{ post.values['theme-verified-count'][0] > 0 ? "True" : "False" }}<p>
+      <div class="postcard-field listing-summary"> 
+           <h2 class="form-label">Overview</h2> 
+            <p>Number of images: {{ post.values['theme-img-count'][0] }}</p> 
+            <p>Number of publications: {{ post.values['theme-pub-count'][0] }}</p>  
+            <p>Verified authors: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p> 
+            <p>Controversiality score: {{ post.values['theme-controversiality'][0] }}</p>                              
+      </div> 
 
-        <!-- TODO: this whole thing should be in its own directive probably -->
-        <div ng-if="post.featured_tweet">
-        <b>Featured tweet</b>
-        <p><img ng-src="{{ post.featured_tweet.user.profile_image_url }}" target="_blank" width="64" height="64">
-           <a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">
-             <i>@{{ post.featured_tweet.user.user_screen_name }}</i>
-            </a>
-            {{ post.featured_tweet.user.user_description }}</p>
-        <p ng-bind="post.featured_tweet.text" linkify="twitter"></p>
-        <p><i>{{ post.featured_tweet.date}}</i></p>
-        </div>
+       <div class="postcard-field listing-summary"> 
+           <h2 class="form-label">Activity</h2> 
+            <p>Started: <em>{{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>  
+            <p>Last activity: <em>{{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>                                
+       </div> 
+       <div class="postcard-field listing-summary"> 
+           <h2 class="form-label">Tweets</h2> 
+           <p>Size: {{ post.values['theme-size'][0] }} tweets</i></p> 
+           <p>Speed: {{ post.values['theme-average-activity'][0] }} tweets/hour</i></p>                           
+       </div> 
 
-        <!--<post-preview-media post="post"></post-preview-media>-->
-        <!-- <img src="http://lorempixel.com/400/300/" class="postcard-image"> -->
+       <div class="listing">                         
+          <div class="listing-item">     
+              <h2 class="form-label featured-header">Featured Tweet</h2>                    
+              <div class="listing-item-primary tweet"> 
+                  
+                 <div class="listing-item-image"> 
+                     <img class="avatar" ng-src="{{ post.featured_tweet.user.profile_image_url }}" alt="">
+                 </div> 
 
-        <!--
-        <div class="postcard-field">
-            <p>{{ post.content }}</p>
-        </div>
-        -->
+                  <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ post.featured_tweet.user.user_screen_name }}</a></h2> 
+                  <p class="listing-item-secondary" ng-bind="post.featured_tweet.user.user_description"></p>
+                  <p class="listing-item-secondary">{{ post.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}</p> 
+
+                  <p ng-bind="post.featured_tweet.text" linkify="twitter"></p> 
+               </div> 
+           </div>
+      </div>
+
     </div> <!-- /postcard-body -->
 
     <!--<post-actions post="post"></post-actions>-->

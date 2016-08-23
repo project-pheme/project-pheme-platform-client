@@ -1,31 +1,5 @@
 <div class="mode-context init" dropdown>
-<!--
-  <header class="mode-context-header">
-    <ol class="breadcrumbs" ng-controller="navigation as nav">
-      <li><a href="/" ng-bind="nav.site.name"></a></li>
-    </ol>
 
-    <h1 class="mode-context-title">{{form_name || 'post.unstructured.survey_title' | translate}}</h1>
-  </header>
-
-  <span class="mode-context-trigger" dropdown-toggle>
-    <svg class="iconic">
-      <use xlink:href="../img/iconic-sprite.svg#chevron-bottom"></use>
-    </svg>
-    <span class="label hidden" translate>app.show_more_less</span>
-  </span>
-
-  <div class="mode-context-body" ng-if="post.form">
-    <p>{{ form_description }}</p>
-
-    <a class="button button-flat" ng-href="/posts/create/{{post.form.id}}">
-      <svg class="iconic">
-        <use xlink:href="../img/iconic-sprite.svg#plus"></use>
-      </svg>
-      <span class="button-label" translate>post.modify.add_to_survey</span>
-    </a>
-  </div>
--->
 </div>
 
 <main role="main">
@@ -56,7 +30,7 @@
           <!-- tags (categories) -->
           <div
             ng-if="!!post.tags.length"
-            class="postcard-field"
+            class="postcard-field listing-summary"
             >
             <h2 class="form-label" translate>Event</h2>
             <p ng-repeat="category in post.tags">
@@ -64,49 +38,74 @@
             </p>
           </div>
           <!-- values -->
-          <h2 class="form-label">Overview</h2>
 
-            <p><i>Started:</i> {{ post.values['theme-start-date'][0] }}</p>
-            <p><i>Last activity:</i> {{ post.values['theme-last-activity'][0] }}</p>
-            <p><i>Size:</i> {{ post.values['theme-size'][0] }} <i>tweets</i><p>
-            <p><i>Speed:</i> {{ post.values['theme-average-activity'][0] }} <i>tweets/hour</i><p>
-            <p><i>Controversiality:</i> {{ post.values['theme-controversiality'][0] }}<p>
-            <p><i>Number of images:</i> {{ post.values['theme-img-count'][0] }}<p>
-            <p><i>Number of articles:</i> {{ post.values['theme-pub-count'][0] }}<p>
-            <p><i>Presence of verified authors:</i> {{ post.values['theme-verified-count'][0] > 0 ? "True" : "False" }}<p>
+          <div class="postcard-field listing-summary"> 
+              <h2 class="form-label">Overview</h2>
+              <p>Number of images: {{ post.values['theme-img-count'][0] }}</p> 
+              <p>Number of publications: {{ post.values['theme-pub-count'][0] }}</p>  
+              <p>Verified authors: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }}</p> 
+              <p>Controversiality score: {{ post.values['theme-controversiality'][0] }} </p>
+          </div>
 
-          <div ng-show="visibleTab == 'threads'">
-            <h2 class="form-label">Threads</h2>
-            <div ng-repeat="thread in theme.threads">
-              <div ng-if="thread.featured_tweet">
-              <b>Featured tweet</b>
-              <p><img ng-src="{{ thread.featured_tweet.user.profile_image_url }}" target="_blank" width="64" height="64">
-                 <a ng-href="https://twitter.com/{{ thread.featured_tweet.user.user_screen_name }}">
-                   <i>@{{ thread.featured_tweet.user.user_screen_name }}</i>
-                  </a>
-                  {{ thread.featured_tweet.user.user_description }}</p>
-              <p ng-bind="thread.featured_tweet.text" linkify="twitter"></p>
-              <p><i>{{ thread.featured_tweet.date}}</i></p>
+          <div class="postcard-field listing-summary"> 
+            <h2 class="form-label">Activity</h2> 
+            <p>Started: {{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</p>  
+            <p>Last activity: {{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</p>
+          </div>
+
+          <div class="postcard-field listing-summary"> 
+            <h2 class="form-label">Tweets</h2> 
+            <p>Size: {{ post.values['theme-size'][0] }} tweets</i></p> 
+            <p>Speed: {{ post.values['theme-average-activity'][0] }} tweets/hour</i></p>
+          </div>
+
+ 
+          <div class="listings" ng-show="visibleTab == 'threads'">
+            <div class="listing-item">
+              <h2 class="form-label">Threads</h2>
+              <div class="listing-item-primary tweet" ng-repeat="thread in theme.threads">
+                <div class="listing-item-image">
+                  <img class="avatar" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
+                </div>
+                <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a></h2> 
+                <p class="listing-item-secondary" ng-bind="thread.featured_tweet.user.user_description"></p>
+                <p class="listing-item-secondary">{{ thread.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}</p> 
+
+                <p ng-bind="thread.featured_tweet.text" linkify="twitter"></p>
               </div>
             </div>
           </div>
 
-          <div ng-show="visibleTab == 'pubs'">
-            <h2 class="form-label">Linked publications</h2>
-            <div ng-repeat="article in theme.articles">
-              <a ng-href="{{ article.url }}">(link)</a> <span ng-bind="article.text" linkify="twitter"></span>
+
+          <div class="listings" ng-show="visibleTab == 'pubs'">
+            <div class="postcard-field">
+              <h2 class="form-label">Linked Publications</h2>
+            </div>
+            <div class="postcard-list">
+              <div class="postcard-field" ng-repeat="article in theme.articles">
+                <p><a ng-href="{{ article.url }}">(link)</a> <span ng-bind="article.text" linkify="twitter"></span><span>[article title]</p>
+              </div>
             </div>
           </div>
 
           <div ng-show="visibleTab == 'images'">
-            <h2 class="form-label">Images</h2>
-            <div ng-repeat="img in theme.images">
-              <img ng-src="{{ img.imgUrl }}" width="100" height="100"> {{ img.count }} times , first seen {{ img.date }}
+            <div class="postcard-field"> 
+              <h2 class="form-label">Images</h2>
+            </div>
+            <div class="gallery">
+              <div class="gallery-thumb" ng-repeat="img in theme.images">
+                <figure>
+                  <img class="avatar" ng-src="{{ img.imgUrl }}" alt=""> 
+                  <span class="image-count">{{ img.count }}</span>
+                </figure>
+              </div>
             </div>
           </div>
 
           <div ng-show="visibleTab == 'places'">
-            <h2 class="form-label">Places</h2>
+            <div class="postcard-field">
+              <h2 class="form-label">Places</h2>
+            </div>
             <!-- maps
             <div
               ng-if="mapDataLoaded"
