@@ -66,7 +66,9 @@ function PostFiltersService(_, FormEndpoint) {
             tags: [],
             form: _.pluck(forms, 'id'),
             set: [],
-            user: false
+            user: false,
+            v_orderby: "theme-last-activity",
+            order: "desc"
         };
     }
 

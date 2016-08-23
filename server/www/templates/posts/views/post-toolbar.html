@@ -6,6 +6,33 @@
 
     <filter-posts filters="filters"></filter-posts>
 
+    <div style="float:right">
+        <div class="form-field" style="float:left">
+          <div class="custom-select">
+             <select
+                ng-model="vOrderbySelected"
+                ng-init="vOrderbySelected = vOrderbyOptions[0]"
+                ng-options="option as option.label for option in vOrderbyOptions"
+                ng-change="vOrderbyChanged(vOrderbySelected)">
+             </select>
+          </div>
+        </div>
+
+        <div class="buttons-updown" style="float:right">
+           <button type="button" class="button-beta" ng-click="setOrder('asc')">
+               <svg class="iconic">
+                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-top"></use>
+               </svg>
+               <span class="label hidden">Ascending</span>
+           </button>
+           <button type="button" class="button-beta" ng-click="setOrder('desc')">
+               <svg class="iconic">
+                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-bottom"></use>
+               </svg>
+               <span class="label hidden">Descending</span>
+           </button>
+        </div>
+    </div>
 
     <div class="button-group">
       <!-- share button

@@ -62,6 +62,12 @@ function ActiveFilters($translate, $filter, PostFilters, _, TagEndpoint, RoleEnd
             if (activeFilters.published_to) {
                 delete activeFilters.published_to;
             }
+            if (activeFilters.v_orderby) {
+                delete activeFilters.v_orderby;
+            }
+            if (activeFilters.order) {
+                delete activeFilters.order;
+            }
 
             // Remove form filter as its shown by the mode-context-form-filter already
             delete activeFilters.form;
