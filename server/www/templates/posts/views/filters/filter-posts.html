@@ -24,15 +24,29 @@
     <!-- Filters menu -->
     <div class="dropdown-menu" data-toggle-target="search-filters" ng-show="searchFiltersToggle" ng-class="{ 'active': searchFiltersToggle }" data-toggle-animate>
         <div class="dropdown-menu-body">
-            <filter-form ng-model="filters.form"></filter-form>
+            <!--<filter-form ng-model="filters.form"></filter-form>-->
 
             <filter-category ng-model="filters.tags"></filter-category>
 
+            <filter-range label="'Controversiality'"
+                name="'filter_controversiality'"
+                unit="'%'" min="0" max="100"
+                value="filter_values.controversiality">
+            </filter-range>
+
+            <filter-range label="'Avg. Activity'"
+                name="'filter_avg_activity'"
+                unit="'tw/hour'" min="0" max="600"
+                value="filter_values.avg_activity">
+            </filter-range>            
+
+            <!--
             <filter-visible-to status-model="filters.status" published-to-model="filters.published_to"></filter-visible-to>
 
             <filter-date created-after-model="filters.created_after" created-before-model="filters.created_before"></filter-date>
 
             <filter-location center-point-model="filters.center_point" within-km-model="filters.within_km"></filter-location>
+            -->
         </div>
 
         <div class="form-field">

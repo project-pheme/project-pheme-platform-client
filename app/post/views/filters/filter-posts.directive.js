@@ -38,6 +38,8 @@ function FilterPostsController($scope, $timeout) {
 
     function applyFilters(event) {
         // ngFormController automatically commits changes to the model ($scope.filters)
+        // apply value filters
+        $scope.applyValueFilters()
         // Just close the dropdown
         $scope.searchFiltersToggle = false;
     }
@@ -64,4 +66,23 @@ function FilterPostsController($scope, $timeout) {
         $scope.postFiltersForm.q.$setViewValue(q);
         $scope.postFiltersForm.q.$render();
     }
+
+    // Indirect binding of filter values to the filter set
+
+    $scope.filter_values = {
+        controversiality: 0 ,
+        avg_activity: 0
+    };
+
+    $scope.filters.values = {
+        "theme-controversiality": JSON.stringify({ op: ">=", term: 0.00}),
+        "theme-average-activity": JSON.stringify({ op: ">=", term: 0.00})
+    };
+
+    $scope.applyValueFilters = function() {
+        $scope.filters.values['theme-controversiality'] = 
+            JSON.stringify({ op: ">=", term: $scope.filter_values.controversiality / 100 });
+        $scope.filters.values['theme-average-activity'] = 
+            JSON.stringify({ op: ">=", term: $scope.filter_values.avg_activity });
+    };
 }
