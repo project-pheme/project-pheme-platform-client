@@ -42,7 +42,7 @@ function (
 
     $scope.saveEvent = function (event) {
         $scope.processing = true;
-        var whereToNext = '/pheme/events';
+        var whereToNext = '/pheme/topics';
 
         var event_obj = {
             name: event.name,
@@ -73,6 +73,6 @@ function (
     };
 
     $scope.cancel = function () {
-        $location.path('/pheme/events');
+        $location.path('/pheme/topics');
     };
 }];

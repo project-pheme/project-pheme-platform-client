@@ -5,11 +5,11 @@
         <!-- main menu -->
         <ul class="deployment-menu">
             <li class="persist" ng-class="{ active: activeMode === 'events' }">
-                <a href="/pheme/events">
+                <a href="/pheme/topics">
                     <svg class="iconic">
                         <use xlink:href="../../img/iconic-sprite.svg#globe"></use>
                     </svg>
-                    <translate>Events</translate>
+                    <translate>Topics</translate>
                 </a>
             </li>
 
@@ -18,10 +18,11 @@
                     <svg class="iconic">
                         <use xlink:href="../../img/iconic-sprite.svg#list-rich"></use>
                     </svg>
-                    <translate>Themes</translate>
+                    <translate>Phemes</translate>
                 </a>
             </li>
 
+            <!--
             <li class="persist" ng-class="{ active: activeMode === 'threads' }">
                 <a href="/pheme/posts/threads/list" class="view-list">
                     <svg class="iconic">
@@ -30,6 +31,7 @@
                     <translate>Threads</translate>
                 </a>
             </li>
+            -->
 
             <li class="more-menu-trigger persist" ng-class="{ active : moreActive }">
                 <a ng-click="showMore($event)">

@@ -56,7 +56,7 @@ function (
     };
 
     $scope.navigateCreate = function (event) {
-        $location.path("/pheme/events/create");
+        $location.path("/pheme/topics/create");
     }
     
 }];
