@@ -71,12 +71,14 @@ function FilterPostsController($scope, $timeout) {
 
     $scope.filter_values = {
         controversiality: 0 ,
-        avg_activity: 0
+        avg_activity: 0 ,
+        size : 5
     };
 
     $scope.filters.values = {
         "theme-controversiality": JSON.stringify({ op: ">=", term: 0.00}),
-        "theme-average-activity": JSON.stringify({ op: ">=", term: 0.00})
+        "theme-average-activity": JSON.stringify({ op: ">=", term: 0.00}),
+        "theme-size": JSON.stringify({ op: ">=", term: 5})
     };
 
     $scope.applyValueFilters = function() {
@@ -84,5 +86,7 @@ function FilterPostsController($scope, $timeout) {
             JSON.stringify({ op: ">=", term: $scope.filter_values.controversiality / 100 });
         $scope.filters.values['theme-average-activity'] = 
             JSON.stringify({ op: ">=", term: $scope.filter_values.avg_activity });
+        $scope.filters.values['theme-size'] = 
+            JSON.stringify({ op: ">=", term: $scope.filter_values.size });
     };
 }
