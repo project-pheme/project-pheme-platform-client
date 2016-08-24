@@ -42,15 +42,18 @@
                     <div class="form-field form-field-adapt">
                         <label translate>pheme.event.description</label>
                         <p translate>pheme.event.description.instructions</p>
-                        <textarea name="description" data-min-rows='1' rows='1' ng-maxlength="150" ng-model="event.description"></textarea>
+                        <textarea name="description" data-min-rows='1' rows='1' ng-maxlength="150" ng-model="event.description" required></textarea>
                     </div>
 
                     <!-- NOTE: this may have to be extended eventually to several keywords (combination of several searches) -->
                     <div class="form-field form-field-adapt">
-                        <label translate>pheme.event.keywords</label>
                         <p translate>pheme.event.keywords.instructions</p>
-                        <input type="text" placeholder="{{'pheme.event.keywords' | translate}}" ng-minlength="3" ng-maxlength="255" ng-model="event.keywords"></textarea>
-                    </div>                    
+                        <label translate>pheme.event.keywords</label>
+                        <fieldset ng-repeat="kw in event.keywords track by kw.id">
+                                <input type="text" placeholder="{{'pheme.event.keywords' | translate}}" ng-model="kw.text"></textarea>
+                        </fieldset>
+                        <button ng-click="addKeywordField()" class="button button-gamma button-flat">pheme.keywords.add</button>
+                    </div>
 
                     <!--<color-picker color-container="event"></color-picker>-->
 

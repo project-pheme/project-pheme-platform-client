@@ -54,5 +54,9 @@ function (
             $scope.selectedEvents.push(event.id);
         }
     };
+
+    $scope.navigateCreate = function (event) {
+        $location.path("/pheme/topics/create");
+    }
     
 }];

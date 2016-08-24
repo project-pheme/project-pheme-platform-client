@@ -1,0 +1,10 @@
+<fieldset ng-model-options="{ updateOn: 'default' }">
+    <legend>{{ label }}</legend>
+
+    <div class="form-field">
+        <label>
+            <input type="range" min="{{ min }}" max="{{ max }}" name="{{ name }}" ng-model="value">
+            <span ng-bind="value"></span> {{ unit }}
+        </label>
+    </div>
+</fieldset>

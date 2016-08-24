@@ -32,26 +32,35 @@ function (
     // Change mode
     $scope.$emit('event:mode:change', $scope.currentView);
 
-    $scope.event = { type: 'pheme-event', icon: 'tag' };
+    $scope.event = { type: 'pheme-event', icon: 'tag', keywords: [ {id: 1, text: ""} ] };
     $scope.processing = false;
+
+    $scope.addKeywordField = function () {
+        var newItemNo = $scope.event.keywords.length+1;
+        $scope.event.keywords.push({id: newItemNo, text: ""});
+    }
 
     $scope.saveEvent = function (event) {
         $scope.processing = true;
-        var whereToNext = '/pheme/events';
+        var whereToNext = '/pheme/topics';
 
         var event_obj = {
             name: event.name,
             description: event.description,
             type: "search",
-            dataSources: [
-                {
-                    twitter: {
-                        type: "Twitter",
-                        keywords: event.keywords
-                    }
-                }
-            ]
+            dataSources: []
         };
+
+        var keywords = _.filter(_.pluck(event.keywords, 'text'), function(x) { return x && x.trim() != ""; });
+
+        _.each(keywords, function(kw) {
+            event_obj.dataSources.push({
+                twitter: {
+                    type: "Twitter",
+                    keywords: kw
+                }
+            });
+        });
 
         PhemeEventsEndpoint.create(event_obj).$promise.then(function (response) {
             $scope.processing = false;
@@ -64,6 +73,6 @@ function (
     };
 
     $scope.cancel = function () {
-        $location.path('/pheme/events');
+        $location.path('/pheme/topics');
     };
 }];

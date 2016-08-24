@@ -5,11 +5,11 @@ function (
 ) {
     /* todo: these routes should only exist when the user is admin! */
     $routeProvider
-    .when('/pheme/events', {
+    .when('/pheme/topics', {
         controller: require('./controllers/pheme-events-controller.js'),
         templateUrl: 'templates/pheme/events/events.html'
     })
-    .when('/pheme/events/create', {
+    .when('/pheme/topics/create', {
         controller: require('./controllers/pheme-events-create-controller.js'),
         templateUrl: 'templates/pheme/events/events-create.html'
     })
