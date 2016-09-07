@@ -86,7 +86,8 @@
             </div>
             <div class="postcard-list">
               <div class="postcard-field" ng-repeat="article in theme.articles">
-                <p><a ng-href="{{ article.url }}">(link)</a> <span ng-bind="article.text" linkify="twitter"></span><span>[article title]</p>
+                <p><span style="font-weight: bold">Via <a ng-href="{{ article.canonicalUrl.scheme}}://{{ article.canonicalUrl.netloc }}" target="_blank">{{ article.canonicalUrl.netloc }}</a></span> (<a ng-href="{{ article.canonicalUrl.url }}" target="_blank">{{ article.canonicalUrl.url }}</a>)<p>
+                <p>Citation context: <span style="font-style: italic" ng-bind="article.text" linkify="twitter"></span></p>
               </div>
             </div>
           </div>
