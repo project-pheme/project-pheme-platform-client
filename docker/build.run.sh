@@ -34,7 +34,7 @@ function sync {
 # Build the client
 build() {
   npm install
-  gulp transifex-download
+  gulp i18n
   gulp build
   cp ./server/rewrite.htaccess ./server/www/
 }
