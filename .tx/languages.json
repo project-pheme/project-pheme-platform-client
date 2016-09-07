@@ -1,0 +1,25 @@
+{
+  "languages": [
+    {
+      "rtl": false,
+      "pluralequation": "language.pluralequation",
+      "code": "en",
+      "name": "English",
+      "nplurals": 2
+    },
+    {
+      "rtl": false,
+      "pluralequation": "language.pluralequation",
+      "code": "de",
+      "name": "German",
+      "nplurals": 2
+    },
+    {
+      "rtl": false,
+      "pluralequation": "language.pluralequation",
+      "code": "en-US",
+      "name": "English (United States)",
+      "nplurals": 2
+    }
+  ]
+}

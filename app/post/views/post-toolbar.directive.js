@@ -16,11 +16,11 @@ PostToolbarController.$inject = ['$scope'];
 function PostToolbarController($scope) {
 
 	$scope.vOrderbyOptions = [
-        { value: "theme-last-activity", label: "Updated" },
-        { value: "theme-size", label: "Size" },
-        { value: "theme-controversiality", label: "Controversiality" },
-        { value: "theme-img-count", label: "# images" },
-        { value: "theme-pub-count", label: "# publications" }
+        { value: "theme-last-activity", label: "pheme.sort.updated" },
+        { value: "theme-size", label: "pheme.sort.size" },
+        { value: "theme-controversiality", label: "pheme.sort.controversiality" },
+        { value: "theme-img-count", label: "pheme.sort.images" },
+        { value: "theme-pub-count", label: "pheme.sort.publications" }
     ];
 
     $scope.vOrderbyChanged = function (selection) {

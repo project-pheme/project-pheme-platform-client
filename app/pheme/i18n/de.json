@@ -1,0 +1,41 @@
+{
+	"pheme": {
+		"topic": {
+			"topic": "Thema",
+			"topics": "Themen",
+			"empty": "Keine Themen verfügbar",
+			"add": "Ein Thema hinzufügen",
+			"name": "Name für das Thema",
+			"description": "Beschreibung des Themas",
+			"description_instructions": "Kurze Beschreibung des Themas in eigenen Worten",
+			"keywords_instructions": "Stichwörter und Hashtags, die vom PHEME-Tool gesucht werden sollen",
+			"keywords": "Stichwörter",
+			"add_keywords": "Stichwörter hinzufügen"
+		},
+		"pheme": {
+			"phemes": "Phemen",
+			"number_images": "Anzahl Bilder",
+			"number_publications": "Anzahl Publikationen",
+			"verified_authors": "Verifizierter Autor",
+			"controversiality": "Widersprüchlichkeits-Wert",
+			"start_date": "Start",
+			"end_date": "Letzter Eintrag",
+			"size": "Grösse",
+			"average_activity": "Tweets pro Minute",
+			"featured_tweet": "Featured Tweet",
+			"threads": "Themenstränge",
+			"publications": "Verlinkte Publikationen",
+			"images": "Verlinkte Bilder",
+			"places": "Ortsangaben"
+		},
+		"sort": {
+			"updated": "Aktualisiert",
+			"size": "Grösse",
+			"controversiality": "Widersprüchlichkeit",
+			"images": "Anzahl Bilder",
+			"publications": "Anzahl Publikationen",
+			"ascending": "Aufsteigend",
+			"descending": "Absteigend"
+		}
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"pheme": {
+		"topic": {
+			"topic": "Topic",
+			"topics": "Topics",
+			"empty": "There are no topics",
+			"add": "Add a Topic",
+			"name": "Name of the topic",
+			"description": "Description of the topic",
+			"description_instructions": "Put in your own words what the topic is about",
+			"keywords_instructions": "Introduce the words and hashtags you would like the dashboard to look for",
+			"keywords": "Keywords",
+			"add_keywords": "Add keywords"
+		},
+		"pheme": {
+			"phemes": "Phemes",
+			"number_images": "Number of images",
+			"number_publications": "Number of publications",
+			"verified_authors": "Verified authors",
+			"controversiality": "Controversiality score",
+			"start_date": "Started",
+			"end_date": "Last activity",
+			"size": "Size",
+			"average_activity": "Average activity",
+			"featured_tweet": "Featured tweet",
+			"threads": "Threads",
+			"publications": "Linked Publications",
+			"images": "Linked Images",
+			"places": "Places"
+		},
+		"sort": {
+			"updated": "Updated",
+			"size": "Size",
+			"controversiality": "Controversiality",
+			"images": "Image count",
+			"publications": "Publication count",
+			"ascending": "Ascending",
+			"descending": "Descending"
+		}
+	}
+}
