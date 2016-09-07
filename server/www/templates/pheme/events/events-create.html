@@ -1,7 +1,7 @@
 <div>
     <div class="mode-context init" dropdown>
         <header class="mode-context-header">
-            <h1 class="mode-context-title" translate>pheme.add_event</h1>
+            <h1 class="mode-context-title" translate>pheme.topic.add</h1>
         </header>
 
         <span class="mode-context-trigger" dropdown-toggle>
@@ -35,24 +35,24 @@
             <form>
                 <div class="form-sheet">
                    <div class="form-field title">
-                       <label class="hidden" translate>pheme.event.name</label>
-                       <input type="text" placeholder="{{'pheme.event.name' | translate}}" ng-minlength="3" ng-maxlength="150" ng-model="event.name" required>
+                       <label class="hidden" translate>pheme.topic.name</label>
+                       <input type="text" placeholder="{{'pheme.topic.name' | translate}}" ng-minlength="3" ng-maxlength="150" ng-model="event.name" required>
                    </div>
 
                     <div class="form-field form-field-adapt">
-                        <label translate>pheme.event.description</label>
-                        <p translate>pheme.event.description.instructions</p>
+                        <label translate>pheme.topic.description</label>
+                        <p translate>pheme.topic.description_instructions</p>
                         <textarea name="description" data-min-rows='1' rows='1' ng-maxlength="150" ng-model="event.description" required></textarea>
                     </div>
 
                     <!-- NOTE: this may have to be extended eventually to several keywords (combination of several searches) -->
                     <div class="form-field form-field-adapt">
-                        <p translate>pheme.event.keywords.instructions</p>
-                        <label translate>pheme.event.keywords</label>
+                        <p translate>pheme.topic.keywords_instructions</p>
+                        <label translate>pheme.topic.keywords</label>
                         <fieldset ng-repeat="kw in event.keywords track by kw.id">
                                 <input type="text" placeholder="{{'pheme.event.keywords' | translate}}" ng-model="kw.text"></textarea>
                         </fieldset>
-                        <button ng-click="addKeywordField()" class="button button-gamma button-flat">pheme.keywords.add</button>
+                        <button ng-click="addKeywordField()" class="button button-gamma button-flat" translate>pheme.topic.add_keywords</button>
                     </div>
 
                     <!--<color-picker color-container="event"></color-picker>-->

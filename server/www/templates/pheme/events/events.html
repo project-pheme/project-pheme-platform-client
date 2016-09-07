@@ -2,7 +2,7 @@
     <layout-class layout="b"></layout-class>
     <div class="mode-context init" dropdown>
         <header class="mode-context-header">
-            <h1 class="mode-context-title" translate>pheme.events</h1>
+            <h1 class="mode-context-title" translate>pheme.topic.topics</h1>
         </header>
 
         <span class="mode-context-trigger" dropdown-toggle>
@@ -31,7 +31,7 @@
         <div class="main-col">
      		<div class="listing card" ng-class="{'toolbar-active': selectedEvents.length}">
                 <div class="alert" ng-hide="events.length">
-                    <p ng-hide="events.length"><em translate>pheme.empty.events</em></p>
+                    <p ng-hide="events.length"><em translate>pheme.topic.empty</em></p>
                 </div>
 
                 <div id="pheme-{{event.id}}" class="listing-item" ng-repeat="event in events | orderBy:'category_id'" ng-class="{ 'warning': isToggled(event) }" ng-click="toggleEvent(event)">
@@ -57,7 +57,7 @@
                 </listing-toolbar>
            </div>
            <div>
-           <button ng-click="navigateCreate()" class="button button-alpha">pheme.events.add</button>
+           <button ng-click="navigateCreate()" class="button button-alpha">pheme.topic.add</button>
            </div>
      	</div>
     </main>

@@ -19,6 +19,8 @@ var gulp         = require('gulp'),
     tar          = require('gulp-tar'),
     gzip         = require('gulp-gzip'),
     jscs         = require('gulp-jscs'),
+    mergeJson    = require('gulp-merge-json'),
+    mergeStream  = require('merge-stream'),
     dotenv       = require('dotenv'),
     Transifex    = require('transifex');
 
@@ -59,6 +61,9 @@ var options = {
     compressedCSS       : gutil.env['compressed-css'] || getBooleanOption(process.env.COMPRESSED_CSS, defaultOptions.compressedCSS),
     www                 : 'server/www'
 };
+
+var transifex_dir = '.tx/',
+    locales_dir = options.www + '/locales/';
 
 // Helpers
 var helpers = {
@@ -399,7 +404,6 @@ gulp.task('heroku:dev', ['build'], function () {});
  */
 gulp.task('transifex-download', function () {
     var project_slug = 'ushahidi-v3',
-        locales_dir = options.www + '/locales/',
         mode = 'default',
         resource = 'client-en',
         // Get languages that are at least 90% translated
@@ -434,6 +438,7 @@ gulp.task('transifex-download', function () {
         }
 
         try {
+            fs.mkdirSync(transifex_dir);
             fs.mkdirSync(locales_dir);
         }
         catch (err) {
@@ -464,7 +469,7 @@ gulp.task('transifex-download', function () {
                         throw err;
                     }
 
-                    fs.writeFileSync(locales_dir +
+                    fs.writeFileSync(transifex_dir +
                                      // Replace underscore with hyphen
                                      language.code.replace('_', '-') +
                                      '.json', data);
@@ -479,12 +484,42 @@ gulp.task('transifex-download', function () {
             });
 
             // Save translated language list
-            fs.writeFileSync(locales_dir + 'languages.json', JSON.stringify({languages: languages}));
+            fs.writeFileSync(transifex_dir + 'languages.json', JSON.stringify({languages: languages}));
 
         });
     });
 });
 
+gulp.task('i18n-pre', function() {
+    gulp.src(transifex_dir + '/languages.json')
+        .pipe(gulp.dest(locales_dir));
+});
+
+gulp.task('i18n-en', ['i18n-pre'], function() {
+    var src1 = gulp.src(transifex_dir + '/en.json');
+    var src2 = gulp.src('./app/pheme/i18n/en.json');
+    mergeStream(src1, src2)
+        .pipe(mergeJson("en.json"))
+        .pipe(gulp.dest(locales_dir));
+});
+
+gulp.task('i18n-en-us', ['i18n-pre'], function() {
+    var src1 = gulp.src(transifex_dir + '/en-US.json');
+    var src2 = gulp.src('./app/pheme/i18n/en.json');
+    mergeStream(src1, src2)
+        .pipe(mergeJson("en-US.json"))
+        .pipe(gulp.dest(locales_dir));
+});
+
+gulp.task('i18n-de', ['i18n-pre'], function() {
+    var src1 = gulp.src(transifex_dir + '/de.json');
+    var src2 = gulp.src('./app/pheme/i18n/de.json');
+    mergeStream(src1, src2)
+        .pipe(mergeJson("de.json"))
+        .pipe(gulp.dest(locales_dir));
+});
+
+gulp.task('i18n', [ 'i18n-en', 'i18n-en-us', 'i18n-de' ]);
 
 /**
  * Task: `default`
