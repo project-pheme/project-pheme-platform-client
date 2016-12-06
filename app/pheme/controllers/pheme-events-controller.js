@@ -6,8 +6,10 @@ module.exports = [
     '$route',
     'multiTranslate',
     'PhemeEventsEndpoint',
+    'PhemeSearchLiveEndpoint',
     'Notify',
     '_',
+    '$log',
 function (
     $scope,
     $rootScope,
@@ -16,9 +18,19 @@ function (
     $route,
     multiTranslate,
     PhemeEventsEndpoint,
+    PhemeSearchLiveEndpoint,
     Notify,
-    _
+    _,
+    $log
 ) {
+
+    $scope.$log = $log;
+    $scope.searchKeywords = "";
+    $scope.showResults = 'events';
+    $scope.liveResults = {
+        status: "loading",
+        results: []
+    }
 
     // Redirect to home if not authorized
     if ($rootScope.hasManageSettingsPermission() === false) {
@@ -58,5 +70,22 @@ function (
     $scope.navigateCreate = function (event) {
         $location.path("/pheme/topics/create");
     }
+
+    $scope.keywordChange = function (event) {
+        if ($scope.searchKeywords == "" && $scope.showResults == 'live') {
+            $scope.showResults = 'events';
+        }
+    }
+
+    $scope.keywordSearch = function (event) {
+        $scope.liveResults.status = 'loading';
+        $scope.liveResults.results = [];
+        $scope.showResults = 'live';
+        PhemeSearchLiveEndpoint.query({ keywords: $scope.searchKeywords }).$promise.then(function (results) {
+            $log.info(results);
+            $scope.liveResults.status = 'loaded';
+            $scope.liveResults.results = results;
+        });
+    };
     
 }];

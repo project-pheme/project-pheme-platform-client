@@ -27,9 +27,28 @@
             </div>
         </div>
         <!-- end toolbar -->
-        <!-- TODO: plug it correctly -->
         <div class="main-col">
-     		<div class="listing card" ng-class="{'toolbar-active': selectedEvents.length}">
+
+            <div id="keyword-search" class="input-with-icon">
+                <svg class="iconic">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#magnifying-glass"></use>
+                </svg>
+                <input type="search" placeholder="Explore Social Media" ng-model="searchKeywords" ng-keyup="$event.keyCode == 13 && keywordSearch()" ng-change="keywordChange()">
+            </div>
+
+            <div ng-show="showResults == 'live' && liveResults.status == 'loading'">
+                <div class="progress-bar"><span>Searching ...</span></div>
+            </div>
+
+            <div id="keyword-search-results" class="listing card" ng-show="showResults == 'live' && liveResults.status == 'loaded'">
+                <div class="listing-item" ng-repeat="result in liveResults.results">
+                    <div class="listing-item-primary">
+                        <p class="listing-item-secondary">{{result.text}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="event-listing" class="listing card" ng-class="{'toolbar-active': selectedEvents.length}" ng-show="showResults == 'events'">
                 <div class="alert" ng-hide="events.length">
                     <p ng-hide="events.length"><em translate>pheme.topic.empty</em></p>
                 </div>
