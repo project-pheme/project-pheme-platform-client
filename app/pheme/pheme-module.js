@@ -4,6 +4,7 @@ angular.module('ushahidi.pheme', ['linkify'])
 
 .service('PhemeEventsEndpoint', require('./services/endpoints/events.js'))
 .service('PhemeThemesEndpoint', require('./services/endpoints/themes.js'))
+.service('PhemeSearchLiveEndpoint', require('./services/endpoints/searchlive.js'))
 
 .config(['$provide', function($provide) {
 	$provide.factory('PhemePostViewService', function() {
