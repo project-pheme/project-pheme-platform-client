@@ -6,6 +6,15 @@ angular.module('ushahidi.pheme', ['linkify'])
 .service('PhemeThemesEndpoint', require('./services/endpoints/themes.js'))
 .service('PhemeSearchLiveEndpoint', require('./services/endpoints/searchlive.js'))
 
+//Used for pagination: we already have a limitTo filter built-in to angular,
+//let's make a startFrom filter
+.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+})
+
 .config(['$provide', function($provide) {
 	$provide.factory('PhemePostViewService', function() {
 		return {

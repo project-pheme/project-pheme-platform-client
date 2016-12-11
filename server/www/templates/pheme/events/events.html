@@ -41,11 +41,12 @@
             </div>
 
             <div id="keyword-search-results" class="listing card" ng-show="showResults == 'live' && liveResults.status == 'loaded'">
-                <div class="listing-item" ng-repeat="result in liveResults.results">
+                <div class="listing-item" ng-repeat="result in liveResults.results | startFrom:liveResults.pag.current*liveResults.pag.size | limitTo:liveResults.pag.size">
                     <div class="listing-item-primary">
                         <p class="listing-item-secondary">{{result.text}}</p>
                     </div>
                 </div>
+                <uib-pagination ng-model="liveResults.pag.current" items-per-page="liveResults.pag.size" total-items="liveResults.results.length" max-size="10" boundary-links="false" rotate="false"></uib-pagination><!-- ng-change="pageChanged()" -->
             </div>
 
             <div id="event-listing" class="listing card" ng-class="{'toolbar-active': selectedEvents.length}" ng-show="showResults == 'events'">

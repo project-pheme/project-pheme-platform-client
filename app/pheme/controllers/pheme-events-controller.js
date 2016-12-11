@@ -25,11 +25,16 @@ function (
 ) {
 
     $scope.$log = $log;
+    $scope._ = _;
     $scope.searchKeywords = "";
     $scope.showResults = 'events';
     $scope.liveResults = {
         status: "loading",
-        results: []
+        results: [],
+        pag: {
+            current: 0,
+            size: 10
+        }
     }
 
     // Redirect to home if not authorized
@@ -85,6 +90,7 @@ function (
             $log.info(results);
             $scope.liveResults.status = 'loaded';
             $scope.liveResults.results = results;
+            $scope.liveResults.pag.current = 0;
         });
     };
     
