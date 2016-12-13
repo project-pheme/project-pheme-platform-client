@@ -29,6 +29,7 @@
         <!-- end toolbar -->
         <div class="main-col">
 
+            <!-- Keyword search box -->
             <div id="keyword-search" class="input-with-icon">
                 <svg class="iconic">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#magnifying-glass"></use>
@@ -36,19 +37,28 @@
                 <input type="search" placeholder="Explore Social Media" ng-model="searchKeywords" ng-keyup="$event.keyCode == 13 && keywordSearch()" ng-change="keywordChange()">
             </div>
 
+            <!-- Keyword search results -->
             <div ng-show="showResults == 'live' && liveResults.status == 'loading'">
                 <div class="progress-bar"><span>Searching ...</span></div>
             </div>
 
             <div id="keyword-search-results" class="listing card" ng-show="showResults == 'live' && liveResults.status == 'loaded'">
-                <div class="listing-item" ng-repeat="result in liveResults.results | startFrom:liveResults.pag.current*liveResults.pag.size | limitTo:liveResults.pag.size">
-                    <div class="listing-item-primary">
-                        <p class="listing-item-secondary">{{result.text}}</p>
+                <div class="listing-item">
+                <div class="listing-item-primary tweet" ng-repeat="result in liveResults.results | startFrom:liveResults.pag.current*liveResults.pag.size | limitTo:liveResults.pag.size">
+                    <div class="listing-item-image">
+                        <img class="avatar" ng-src="https://twitter.com/{{ result.userScreenName }}/profile_image?size=normal" alt="">
                     </div>
+                    <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ result.userScreenName }}">@{{ result.userScreenName }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
+                    <p class="listing-item-secondary" ng-bind="result.userDescription"></p>
+                    <p class="listing-item-secondary">{{ result.createdAt | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="https://twitter.com/{{ result.userScreenName }}/status/{{ result.tweetID }}" target="_blank">open in twitter</a></p>
+                    <p ng-bind="result.text" linkify="twitter"><p>
                 </div>
                 <uib-pagination ng-model="liveResults.pag.current" items-per-page="liveResults.pag.size" total-items="liveResults.results.length" max-size="10" boundary-links="false" rotate="false"></uib-pagination><!-- ng-change="pageChanged()" -->
+                </div>
             </div>
 
+            <!-- List of topics -->
+            <h2 ng-show="showResults == 'events'">Last active topics ...</h2>
             <div id="event-listing" class="listing card" ng-class="{'toolbar-active': selectedEvents.length}" ng-show="showResults == 'events'">
                 <div class="alert" ng-hide="events.length">
                     <p ng-hide="events.length"><em translate>pheme.topic.empty</em></p>
@@ -63,6 +73,7 @@
                     <div class="listing-item-primary">
                         <h2 class="listing-item-title"><!--<a ng-href="/settings/categories/{{category.id}}">-->{{event.name}}<!--</a>--></h2>
                         <p class="listing-item-secondary">{{event.description}}</p>
+                        <p class="listing-item-secondary">Last activity: {{ event.updated > 0 ? (event.updated | date:'yyyy-MM-dd HH:mm') : "never" }}</p>
                     </div>
 
                 </div>
@@ -77,7 +88,7 @@
                 </listing-toolbar>
            </div>
            <div>
-           <button ng-click="navigateCreate()" class="button button-alpha">pheme.topic.add</button>
+           <button ng-click="navigateCreate()" class="button button-alpha" translate>pheme.topic.add</button>
            </div>
      	</div>
     </main>

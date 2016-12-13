@@ -4,6 +4,7 @@ module.exports = [
     '$location',
     '$translate',
     '$route',
+    '$routeParams',
     'multiTranslate',
     'PhemeEventsEndpoint',
     'Notify',
@@ -14,6 +15,7 @@ function (
     $location,
     $translate,
     $route,
+    $routeParams,
     multiTranslate,
     PhemeEventsEndpoint,
     Notify,
@@ -32,7 +34,11 @@ function (
     // Change mode
     $scope.$emit('event:mode:change', $scope.currentView);
 
-    $scope.event = { type: 'pheme-event', icon: 'tag', keywords: [ {id: 1, text: ""} ] };
+    $scope.event = {
+        type: 'pheme-event',
+        icon: 'tag',
+        keywords: [ {id: 1, text: ($routeParams.keywords || "")} ]
+    };
     $scope.processing = false;
 
     $scope.addKeywordField = function () {

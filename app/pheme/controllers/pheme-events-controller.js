@@ -52,6 +52,11 @@ function (
     // Pull events from the server
     $scope.refreshView = function () {
         PhemeEventsEndpoint.query().$promise.then(function (events) {
+            // Sort events in descending order by "updated"
+            events.forEach(function(event) {
+                event.updated = Date.parse(event.updated)
+            })
+            events.sort(function (e1, e2) { return e2.updated - e1.updated; });
             $scope.events = events;
         });
         $scope.selectedEvents = [];
@@ -74,6 +79,9 @@ function (
 
     $scope.navigateCreate = function (event) {
         $location.path("/pheme/topics/create");
+        if ($scope.searchKeywords) {
+            $location.search('keywords', $scope.searchKeywords);
+        }
     }
 
     $scope.keywordChange = function (event) {

@@ -66,16 +66,17 @@
           <div class="listings" ng-show="visibleTab == 'threads'">
             <div class="listing-item">
               <h2 class="form-label" translate>pheme.pheme.threads</h2>
-              <div class="listing-item-primary tweet" ng-repeat="thread in theme.threads">
+              <div class="listing-item-primary tweet" ng-repeat="thread in theme.threads | startFrom:current_thread_page*5 | limitTo:5">
                 <div class="listing-item-image">
-                  <img class="avatar" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
+                    <img class="avatar" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
                 </div>
-                <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%"ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
+                <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
                 <p class="listing-item-secondary" ng-bind="thread.featured_tweet.user.user_description"></p>
-                <p class="listing-item-secondary">{{ thread.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="{{ thread.uri }}" target="_blank">open in twitter</a></p> 
-
+                <p class="listing-item-secondary">{{ thread.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="{{ thread.uri }}" target="_blank">open in twitter</a></p>
+                <p class="listing-item-secondary" ng-show="thread.featured_tweet.veracity_score > 0.5"><b>Veracity</b>: {{ thread.featured_tweet.veracity }} ({{ thread.featured_tweet.veracity_score * 100 }}% confidence)</p>
                 <p ng-bind="thread.featured_tweet.text" linkify="twitter"><p>
               </div>
+              <uib-pagination ng-model="current_thread_page" items-per-page="10" total-items="theme.threads.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
             </div>
           </div>
 

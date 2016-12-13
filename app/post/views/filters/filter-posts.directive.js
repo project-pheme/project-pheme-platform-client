@@ -78,7 +78,7 @@ function FilterPostsController($scope, $timeout) {
     $scope.filters.values = {
         "theme-controversiality": JSON.stringify({ op: ">=", term: 0.00}),
         "theme-average-activity": JSON.stringify({ op: ">=", term: 0.00}),
-        "theme-size": JSON.stringify({ op: ">=", term: 5})
+        "theme-size": JSON.stringify({ op: ">=", term: 2})
     };
 
     $scope.applyValueFilters = function() {

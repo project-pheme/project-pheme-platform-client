@@ -4,7 +4,7 @@ module.exports = ['$routeProvider', '$locationProvider', function ($routeProvide
 
     $routeProvider
         .when('/', {
-            redirectTo: '/pheme/posts/themes/list'
+            redirectTo: '/pheme/topics'
         })
         .when('/login', {
             controller: require('./auth/login.controller.js'),
