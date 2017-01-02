@@ -37,11 +37,6 @@ function (
         }
     }
 
-    // Redirect to home if not authorized
-    if ($rootScope.hasManageSettingsPermission() === false) {
-        return $location.path('/');
-    }
-
     $translate('pheme.events').then(function (title) {
         $scope.title = title;
         $scope.$emit('setPageTitle', title);
@@ -58,6 +53,8 @@ function (
             })
             events.sort(function (e1, e2) { return e2.updated - e1.updated; });
             $scope.events = events;
+        }).catch(function (error) {
+            $log.error("events-controller err: " + error);
         });
         $scope.selectedEvents = [];
     };

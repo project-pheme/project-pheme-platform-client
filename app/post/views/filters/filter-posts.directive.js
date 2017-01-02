@@ -72,7 +72,7 @@ function FilterPostsController($scope, $timeout) {
     $scope.filter_values = {
         controversiality: 0 ,
         avg_activity: 0 ,
-        size : 5
+        size : 2
     };
 
     $scope.filters.values = {
