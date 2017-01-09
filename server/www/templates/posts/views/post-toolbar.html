@@ -11,7 +11,7 @@
           <div class="custom-select">
              <select
                 ng-model="vOrderbySelected"
-                ng-init="vOrderbySelected = vOrderbyOptions[0]"
+                ng-init="vOrderbySelected = vOrderbyOptions[2]"
                 ng-options="option as (option.label | translate) for option in vOrderbyOptions"
                 ng-change="vOrderbyChanged(vOrderbySelected)">
              </select>
