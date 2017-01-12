@@ -12,21 +12,7 @@
             <span class="label hidden" translate>app.show_more_less</span>
         </span>
     </div>
-    <main role="main">
-    	<!-- toolbar -->
-        <div class="toolbar">
-            <div class="fab">
-                <!--
-                <a ng-href="/pheme/events/create" type="button" class="button button-alpha button-fab">
-                    <svg class="iconic">
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#plus"></use>
-                    </svg>
-                    <span class="hidden" translate>pheme.add_events</span>
-                </a>
-                -->
-            </div>
-        </div>
-        <!-- end toolbar -->
+    <main role="main" class="topics">
         <div class="main-col">
 
             <!-- Keyword search box -->
@@ -40,7 +26,7 @@
             <!-- Keyword search results -->
             <div ng-show="showResults == 'live' && liveResults.status == 'loading'">
                 <div class="progress-bar"><span>Searching ...</span></div>
-            </div> 
+            </div>
 
             <div id="keyword-search-results" class="listing card" ng-show="showResults == 'live' && liveResults.status == 'loaded'">
                 <div class="listing-item">
@@ -48,7 +34,7 @@
                     <div class="listing-item-image">
                         <img class="avatar" ng-src="https://twitter.com/{{ result.userScreenName }}/profile_image?size=normal" alt="">
                     </div>
-                    <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ result.userScreenName }}">@{{ result.userScreenName }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
+                    <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ result.userScreenName }}">@{{ result.userScreenName }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2>
                     <p class="listing-item-secondary" ng-bind="result.userDescription"></p>
                     <p class="listing-item-secondary">{{ result.createdAt | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="https://twitter.com/{{ result.userScreenName }}/status/{{ result.tweetID }}" target="_blank">open in twitter</a></p>
                     <p ng-bind="result.text" linkify="twitter"><p>
