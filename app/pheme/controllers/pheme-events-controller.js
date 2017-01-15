@@ -26,16 +26,16 @@ function (
 
     $scope.$log = $log;
     $scope._ = _;
-    $scope.searchKeywords = "";
+    $scope.searchKeywords = '';
     $scope.showResults = 'events';
     $scope.liveResults = {
-        status: "loading",
+        status: 'loading',
         results: [],
         pag: {
             current: 0,
             size: 10
         }
-    }
+    };
 
     $translate('pheme.events').then(function (title) {
         $scope.title = title;
@@ -49,12 +49,12 @@ function (
         PhemeEventsEndpoint.query().$promise.then(function (events) {
             // Sort events in descending order by "updated"
             events.forEach(function(event) {
-                event.updated = Date.parse(event.updated)
-            })
+                event.updated = Date.parse(event.updated);
+            });
             events.sort(function (e1, e2) { return e2.updated - e1.updated; });
             $scope.events = events;
         }).catch(function (error) {
-            $log.error("events-controller err: " + error);
+            $log.error('events-controller err: ' + error);
         });
         $scope.selectedEvents = [];
     };
@@ -75,17 +75,17 @@ function (
     };
 
     $scope.navigateCreate = function (event) {
-        $location.path("/pheme/topics/create");
+        $location.path('/pheme/topics/create');
         if ($scope.searchKeywords) {
             $location.search('keywords', $scope.searchKeywords);
         }
-    }
+    };
 
     $scope.keywordChange = function (event) {
-        if ($scope.searchKeywords == "" && $scope.showResults == 'live') {
+        if ($scope.searchKeywords === '' && $scope.showResults === 'live') {
             $scope.showResults = 'events';
         }
-    }
+    };
 
     $scope.keywordSearch = function (event) {
         $scope.liveResults.status = 'loading';

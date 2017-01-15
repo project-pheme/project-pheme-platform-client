@@ -27,7 +27,7 @@ function PhemeThemeDetailController($scope, $controller, $translate, $routeParam
 
     // Transform some data values
     (theme.threads || []).forEach( function(thread) {
-        thread.featured_tweet.veracity_score = parseFloat(thread.featured_tweet.veracity_score || "0.0");
+        thread.featured_tweet.veracity_score = parseFloat(thread.featured_tweet.veracity_score || '0.0');
     });
     $scope.current_thread_page = 0;
 

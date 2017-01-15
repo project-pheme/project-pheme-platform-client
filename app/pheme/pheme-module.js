@@ -12,7 +12,7 @@ angular.module('ushahidi.pheme', ['linkify'])
     return function(input, start) {
         start = +start; //parse to int
         return input.slice(start);
-    }
+    };
 })
 
 .config(['$provide', function($provide) {
@@ -24,7 +24,7 @@ angular.module('ushahidi.pheme', ['linkify'])
 			setPostType: function(v) {
 				this.postType = v;
 			}
-		}
+		};
 	});
 	//
 	$provide.decorator('modeBarDirective', [
@@ -47,7 +47,7 @@ angular.module('ushahidi.pheme', ['linkify'])
 			// Assuming we are dealing with themes, expand that post a little bit
 			directive.controller = [ '$scope', 'PhemePostViewService', function($scope, PhemePostViewService) {
 				$scope.postType = PhemePostViewService.getPostType();
-				if ($scope.postType == 'themes') {
+				if ($scope.postType === 'themes') {
 					// process the contents of the theme post type
 					try {
 						$scope.post.featured_tweet = JSON.parse($scope.post.values['theme-featured-tweet'][0]);
