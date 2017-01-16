@@ -25,21 +25,40 @@
 
             <!-- Keyword search results -->
             <div ng-show="showResults == 'live' && liveResults.status == 'loading'">
-                <div class="progress-bar"><span>Searching ...</span></div>
+                <h2 class="progress-bar"><span>Searching ...</span></h2>
             </div>
 
             <div id="keyword-search-results" class="listing card" ng-show="showResults == 'live' && liveResults.status == 'loaded'">
                 <div class="listing-item">
-                <div class="listing-item-primary tweet" ng-repeat="result in liveResults.results | startFrom:liveResults.pag.current*liveResults.pag.size | limitTo:liveResults.pag.size">
-                    <div class="listing-item-image">
-                        <img class="avatar" ng-src="https://twitter.com/{{ result.userScreenName }}/profile_image?size=normal" alt="">
+
+                    <div class="listing-item-primary tweet" ng-repeat="result in liveResults.results | startFrom:liveResults.pag.current*liveResults.pag.size | limitTo:liveResults.pag.size">
+
+                        <div class="listing-item-image">
+                            <img class="avatar" ng-src="https://twitter.com/{{ result.userScreenName }}/profile_image?size=normal" alt="">
+                        </div>
+
+                        <h2 class="listing-item-title">
+                            <a ng-href="https://twitter.com/{{ result.userScreenName }}">
+                                <span class="tweet-name">{{ result.userName }}</span>
+                                <span class="tweet-username">@{{ result.userScreenName }}</span>
+                            </a>
+                            <span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span>
+                        </h2>
+
+                        <!-- <p class="listing-item-secondary" ng-bind="result.userDescription"></p> -->
+
+                        <!-- <p class="listing-item-secondary">{{ result.createdAt | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="https://twitter.com/{{ result.userScreenName }}/status/{{ result.tweetID }}" target="_blank">open in twitter</a></p> -->
+
+                        <p class="tweet-result" ng-bind="result.text" linkify="twitter"><p>
+
+                        <p class="tweet-date">{{ result.createdAt | date:'h:mm a - d MMM y'}}
+                            <a class="tweet-open" ng-href="https://twitter.com/{{ result.userScreenName }}/status/{{ result.tweetID }}" target="_blank">open in twitter</a>
+                        </p>
+
                     </div>
-                    <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ result.userScreenName }}">@{{ result.userScreenName }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2>
-                    <p class="listing-item-secondary" ng-bind="result.userDescription"></p>
-                    <p class="listing-item-secondary">{{ result.createdAt | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="https://twitter.com/{{ result.userScreenName }}/status/{{ result.tweetID }}" target="_blank">open in twitter</a></p>
-                    <p ng-bind="result.text" linkify="twitter"><p>
-                </div>
-                <uib-pagination ng-model="liveResults.pag.current" items-per-page="liveResults.pag.size" total-items="liveResults.results.length" max-size="10" boundary-links="false" rotate="false"></uib-pagination>
+
+                    <uib-pagination ng-model="liveResults.pag.current" items-per-page="liveResults.pag.size" total-items="liveResults.results.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
+
                 </div>
             </div>
 
