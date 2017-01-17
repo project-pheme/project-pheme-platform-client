@@ -5,6 +5,12 @@
             <h1 class="mode-context-title" translate>pheme.topic.topics</h1>
         </header>
 
+        <div class="mode-context-body">
+            <p ng-bind="nav.site.description"></p>
+
+            <mode-context-category-filter></mode-context-category-filter>
+        </div>
+
         <span class="mode-context-trigger" dropdown-toggle>
             <svg class="iconic">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-bottom"></use>
@@ -79,7 +85,7 @@
                         <h2 class="listing-item-title"><!--<a ng-href="/settings/categories/{{category.id}}">-->{{event.name}}<!--</a>--></h2>
                         <p class="listing-item-secondary topic-description">{{event.description}}</p>
                         <p class="listing-item-secondary">Last activity: {{ event.updated > 0 ? (event.updated | date:'yyyy-MM-dd HH:mm') : "never" }}</p>
-                        <p class="listing-item-secondary">Capturing until: YYYY-mm-dd</p>
+                        <p class="listing-item-secondary">Capturing until: {{ event['capture-end-date'] }}</p>
                     </div>
 
                 </div>
