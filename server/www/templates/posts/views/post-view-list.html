@@ -1,5 +1,37 @@
 <div class="main-col phemes">
 
+    <div class="toolbox">
+        <div class="tool">
+            <h6 class="tool-heading">Sort By</h6>
+
+            <div class="form-field">
+              <div class="custom-select">
+                 <select
+                    ng-model="vOrderbySelected"
+                    ng-init="vOrderbySelected = vOrderbyOptions[2]"
+                    ng-options="option as (option.label | translate) for option in vOrderbyOptions"
+                    ng-change="vOrderbyChanged(vOrderbySelected)">
+                 </select>
+              </div>
+            </div>
+
+            <div class="buttons-updown">
+               <button type="button" class="button-beta" ng-click="setOrder('asc')">
+                   <svg class="iconic">
+                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-top"></use>
+                   </svg>
+                   <span class="label hidden" translate>pheme.sort.ascending</span>
+               </button>
+               <button type="button" class="button-beta" ng-click="setOrder('desc')">
+                   <svg class="iconic">
+                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-bottom"></use>
+                   </svg>
+                   <span class="label hidden" translate>pheme.sort.descending</span>
+               </button>
+            </div>
+        </div>
+    </div>
+
     <div class="listing timeline" ng-class="{ 'toolbar-active' : selectedPosts.length > 0 }">
 
         <div class="alert confirmation">

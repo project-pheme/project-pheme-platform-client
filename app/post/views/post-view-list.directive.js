@@ -51,6 +51,24 @@ function PostListController(
     $scope.userHasBulkActionPermissions = userHasBulkActionPermissions;
     $scope.pageChanged = getPostsForPagination;
 
+    // sorting controls
+    $scope.vOrderbyOptions = [
+        { value: "theme-last-activity", label: "pheme.sort.updated" },
+        { value: "theme-size", label: "pheme.sort.size" },
+        { value: "theme-controversiality", label: "pheme.sort.controversiality" },
+        { value: "theme-img-count", label: "pheme.sort.images" },
+        { value: "theme-pub-count", label: "pheme.sort.publications" }
+    ];
+
+    $scope.vOrderbyChanged = function (selection) {
+        $scope.filters.v_orderby = selection.value;
+    };
+
+    $scope.setOrder = function (value) {
+        $scope.filters.order = value;
+    };
+    //
+
     activate();
 
     // whenever the filters changes, update the current list of posts
