@@ -14,7 +14,7 @@
               <p><translate>pheme.pheme.number_images</translate>: {{ post.values['theme-img-count'][0] }}</p> 
               <p><translate>pheme.pheme.number_publications</translate>: {{ post.values['theme-pub-count'][0] }}</p>  
               <p><translate>pheme.pheme.verified_authors</translate>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p> 
-              <p><translate>pheme.pheme.controversiality</translate>: {{ post.values['theme-controversiality'][0] * 100 }}%</p>
+              <p><translate>pheme.pheme.controversiality</translate>: {{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</p>
         </div>
 
          <div class="listing-summary-block"> 
@@ -26,7 +26,7 @@
          <div class="listing-summary-block"> 
              <h2 class="form-label">Tweets</h2> 
              <p><translate>pheme.pheme.size</translate>: {{ post.values['theme-size'][0] }} tweets</i></p> 
-             <p><translate>pheme.pheme.average_activity</translate>: {{ post.values['theme-average-activity'][0] }} tweets/min</i></p>
+             <p><translate>pheme.pheme.average_activity</translate>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/min</i></p>
          </div>
       </div>
 
