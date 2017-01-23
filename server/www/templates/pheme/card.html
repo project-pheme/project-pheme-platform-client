@@ -36,9 +36,9 @@
             <p><translate>pheme.pheme.average_activity</translate>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/min</i></p>
         </div>
 
-        <div class="listing-summary-block">
+        <div class="listing-summary-block" ng-if="post.values['theme-most-shared-img'][0] != ''">
             <h2 class="form-label">Most Shared Image</h2>
-            <a ng-if="post.values['theme-most-shared-img'][0] != ''" ng-href="{{ post.values['theme-most-shared-img'][0] }}" target="_blank">
+            <a ng-href="{{ post.values['theme-most-shared-img'][0] }}" target="_blank">
                 <img class="most-shared-image" ng-src="{{ post.values['theme-most-shared-img'][0] }}" width="128" height="128'" style="object-fit: cover;" alt="">
             </a>
         </div>
