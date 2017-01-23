@@ -24,7 +24,8 @@ function (
                     var event = data[eventId];
                     event.name = event.display_name
                     event.id = event._id;
-                    newData.push(event)
+                    event['capture-end-date'] = new Date(event['capture-end-date']);
+                    newData.push(event);
                 }
                 return newData;
             }

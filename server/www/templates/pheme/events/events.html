@@ -85,7 +85,7 @@
                         <h2 class="listing-item-title"><!--<a ng-href="/settings/categories/{{category.id}}">-->{{event.name}}<!--</a>--></h2>
                         <p class="listing-item-secondary topic-description">{{event.description}}</p>
                         <p class="listing-item-secondary">Last activity: {{ event.updated > 0 ? (event.updated | date:'yyyy-MM-dd HH:mm') : "never" }}</p>
-                        <p class="listing-item-secondary">Capturing until: {{ event['capture-end-date'] }}</p>
+                        <p class="listing-item-secondary">Capturing until: {{ event['capture-end-date'] | date:'yyyy-MM-dd HH:mm' }}</p>
                     </div>
 
                 </div>

@@ -29,6 +29,9 @@ function (
             }]
         }
     })
+    .when('/pheme/help', {
+        templateUrl: 'templates/pheme/help.html'
+    })
     ;
 
 }];
