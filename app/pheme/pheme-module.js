@@ -45,7 +45,7 @@ angular.module('ushahidi.pheme', ['linkify'])
 			// Modify the template of the original post card directive
 			directive.templateUrl = 'templates/pheme/card.html';
 			// Assuming we are dealing with themes, expand that post a little bit
-			directive.controller = [ '$scope', 'PhemePostViewService', function($scope, PhemePostViewService) {
+			directive.controller = [ '$scope', 'PhemePostViewService', 'TagEndpoint', function($scope, PhemePostViewService, TagEndpoint) {
 				$scope.postType = PhemePostViewService.getPostType();
 				if ($scope.postType === 'themes') {
 					// process the contents of the theme post type
@@ -55,6 +55,9 @@ angular.module('ushahidi.pheme', ['linkify'])
 						// silent failure
 					}
 				}
+				TagEndpoint.get({ id: $scope.post.tags[0].id, ignore403: true }, function (tag) {
+                    $scope.post.tags[0].$t = tag;
+                });
 			} ];
 			return $delegate;
 		}
