@@ -38,8 +38,8 @@
 
         <div class="listing-summary-block">
             <h2 class="form-label">Most Shared Image</h2>
-            <a ng-href="{{ img.imgUrl }}" target="_blank">
-                <img class="most-shared-image" ng-src="{{ img.imgUrl }}" width="128" height="128'" style="object-fit: cover;" alt="">
+            <a ng-if="post.values['theme-most-shared-img'][0] != ''" ng-href="{{ post.values['theme-most-shared-img'][0] }}" target="_blank">
+                <img class="most-shared-image" ng-src="{{ post.values['theme-most-shared-img'][0] }}" width="128" height="128'" style="object-fit: cover;" alt="">
             </a>
         </div>
 
