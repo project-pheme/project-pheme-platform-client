@@ -34,7 +34,7 @@
                 <h2 class="progress-bar"><span>Searching ...</span></h2>
             </div>
 
-            <div id="keyword-search-results" class="listing card" ng-show="showResults == 'live' && liveResults.status == 'loaded'">
+            <div id="keyword-search-results" class="listing card tweet" ng-show="showResults == 'live' && liveResults.status == 'loaded'">
                 <div class="listing-item">
 
                     <div class="listing-item-primary tweet" ng-repeat="result in liveResults.results | startFrom:liveResults.pag.current*liveResults.pag.size | limitTo:liveResults.pag.size">

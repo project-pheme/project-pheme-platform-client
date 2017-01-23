@@ -3,52 +3,70 @@
     <div class="listing-item-select" ng-if="canSelect">
         <input type="checkbox" checklist-value="post.id" checklist-model="selectedPosts">
     </div>
+
     <div class="postcard-body" style="position: relative">
-      <header class="postcard-header"> 
-        <h1 class="postcard-title"><a href="/pheme/themes/{{post.id}}">{{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}} </a></h1> 
+      <header class="postcard-header">
+        <h1 class="postcard-title"><a href="/pheme/themes/{{post.id}}">{{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}} </a></h1>
       </header>
 
       <div style="position: absolute; text-align: right; bottom: 0; font-size:11px; font-style: italic; width: 88%">
         <p>{{ post.tags[0].$t.tag }}</p>
-      </div> 
+      </div>
 
       <div class="listing-summary clearfix">
         <div class="listing-summary-block">
-             <h2 class="form-label">Overview</h2> 
-              <p><translate>pheme.pheme.number_images</translate>: {{ post.values['theme-img-count'][0] }}</p> 
-              <p><translate>pheme.pheme.number_publications</translate>: {{ post.values['theme-pub-count'][0] }}</p>  
-              <p><translate>pheme.pheme.verified_authors</translate>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p> 
+             <h2 class="form-label">Overview</h2>
+              <p><translate>pheme.pheme.number_images</translate>: {{ post.values['theme-img-count'][0] }}</p>
+              <p><translate>pheme.pheme.number_publications</translate>: {{ post.values['theme-pub-count'][0] }}</p>
+              <p><translate>pheme.pheme.verified_authors</translate>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p>
               <p><translate>pheme.pheme.controversiality</translate>: {{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</p>
         </div>
-         <div class="listing-summary-block"> 
-           <h2 class="form-label">Activity</h2> 
-            <p><translate>pheme.pheme.start_date</translate>: <em>{{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>  
-            <p><translate>pheme.pheme.end_date</translate>: <em>{{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>                                
+
+         <div class="listing-summary-block">
+           <h2 class="form-label">Activity</h2>
+            <p><translate>pheme.pheme.start_date</translate>: <em>{{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
+            <p><translate>pheme.pheme.end_date</translate>: <em>{{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
          </div>
 
-         <div class="listing-summary-block"> 
-             <h2 class="form-label">Tweets</h2> 
-             <p><translate>pheme.pheme.size</translate>: {{ post.values['theme-size'][0] }} tweets</i></p> 
+         <div class="listing-summary-block">
+             <h2 class="form-label">Tweets</h2>
+             <p><translate>pheme.pheme.size</translate>: {{ post.values['theme-size'][0] }} tweets</i></p>
              <p><translate>pheme.pheme.average_activity</translate>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/min</i></p>
          </div>
       </div>
 
-       <div class="listing">                         
-          <div class="listing-item">     
-              <h2 class="form-label featured-header" translate>pheme.pheme.featured_tweet</h2>                    
-              <div class="listing-item-primary tweet"> 
-                  
-                 <div class="listing-item-image"> 
-                     <img class="avatar" ng-src="{{ post.featured_tweet.user.profile_image_url }}" alt="">
-                 </div> 
+       <div class="listing tweet">
 
-                  <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ post.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%"ng-if="post.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
-                  <p class="listing-item-secondary" ng-bind="post.featured_tweet.user.user_description"></p>
-                  <p class="listing-item-secondary">{{ post.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}</p> 
+           <div class="listing-item">
 
-                  <p ng-bind="post.featured_tweet.text" linkify="twitter"></p> 
-               </div> 
+               <h2 class="form-label featured-header" translate>pheme.pheme.featured_tweet</h2>
+
+               <div class="listing-item-primary tweet">
+
+                   <div class="listing-item-image">
+                       <img class="avatar" ng-src="{{ post.featured_tweet.user.profile_image_url }}" alt="">
+                   </div>
+
+                   <h2 class="listing-item-title">
+                       <a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">
+                           <span class="tweet-name">{{ post.featured_tweet.user.name }}</span>
+                           <span class="tweet-username">@{{ post.featured_tweet.user.user_screen_name }}</span>
+                       </a>
+                       <span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span>
+                   </h2>
+
+                   <p class="tweet-result" ng-bind="post.featured_tweet.text" linkify="twitter"><p>
+
+                   <p class="tweet-date">{{ post.featured_tweet.date | date:'h:mm a - d MMM y'}}
+                       <a class="tweet-open" ng-href="https://twitter.com/{{ result.userScreenName }}/status/{{ result.tweetID }}" target="_blank">open in twitter</a>
+                   </p>
+
+               </div>
+
+               <uib-pagination ng-model="liveResults.pag.current" items-per-page="liveResults.pag.size" total-items="liveResults.results.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
+
            </div>
+
       </div>
 
     </div> <!-- /postcard-body -->
