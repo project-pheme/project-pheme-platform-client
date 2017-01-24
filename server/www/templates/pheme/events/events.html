@@ -31,8 +31,6 @@
                 <input type="search" placeholder="Explore Social Media" ng-model="searchKeywords" ng-keyup="$event.keyCode == 13 && keywordSearch()" ng-change="keywordChange()">
             </div>
 
-            <button ng-click="navigateCreate()" class="button button-alpha" translate>pheme.topic.add</button>
-
             <!-- Keyword search results -->
             <div ng-show="showResults == 'live' && liveResults.status == 'loading'">
                 <h2 class="progress-bar"><span>Searching ...</span></h2>
@@ -71,6 +69,8 @@
 
                 </div>
             </div>
+
+            <button ng-click="navigateCreate()" class="button button-alpha" translate>pheme.topic.add</button>
 
             <!-- List of topics -->
             <h2 ng-show="showResults == 'events'">Last active topics ...</h2>
