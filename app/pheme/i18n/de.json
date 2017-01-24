@@ -26,7 +26,8 @@
 			"threads": "Themenstränge",
 			"publications": "Verlinkte Publikationen",
 			"images": "Verlinkte Bilder",
-			"places": "Ortsangaben"
+			"places": "Ortsangaben",
+			"topic_label": "!!Topic"
 		},
 		"sort": {
 			"updated": "Aktualisiert",

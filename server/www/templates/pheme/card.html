@@ -1,5 +1,5 @@
 <article class="postcard">
-    <div class="post-band" todo-style="background-color: #A51A1A;"></div>
+    <div class="post-band" ng-class="'topic-color-' + (post.tags[0].$t.id % 10)" todo-style="background-color: #A51A1A;"></div>
     <div class="listing-item-select" ng-if="canSelect">
         <input type="checkbox" checklist-value="post.id" checklist-model="selectedPosts">
     </div>
@@ -10,15 +10,12 @@
         <h1 class="postcard-title"><a href="/pheme/themes/{{post.id}}">{{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}} </a></h1>
       </header>
 
-      <div style="position: absolute; text-align: right; bottom: 0; font-size:11px; font-style: italic; width: 88%">
-        <p>{{ post.tags[0].$t.tag }}</p>
-      </div>
-
       <div class="listing-summary clearfix">
 
           <div class="listing-summary-wrapper">
               <div class="listing-summary-block">
                    <h2 class="form-label">Overview</h2>
+                    <p><translate>pheme.pheme.topic_label</translate>: <span class="topic-label" ng-class="'topic-color-' + (post.tags[0].$t.id % 10)">{{ post.tags[0].$t.tag }}</span></p>
                     <p><translate>pheme.pheme.number_images</translate>: {{ post.values['theme-img-count'][0] }}</p>
                     <p><translate>pheme.pheme.number_publications</translate>: {{ post.values['theme-pub-count'][0] }}</p>
                     <p><translate>pheme.pheme.verified_authors</translate>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p>

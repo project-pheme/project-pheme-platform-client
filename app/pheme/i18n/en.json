@@ -26,7 +26,8 @@
 			"threads": "Threads",
 			"publications": "Linked Publications",
 			"images": "Linked Images",
-			"places": "Places"
+			"places": "Places",
+			"topic_label" : "Topic" 
 		},
 		"sort": {
 			"updated": "Updated",
