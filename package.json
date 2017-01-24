@@ -104,7 +104,7 @@
     "ng-showdown": "rjmackay/ng-showdown#patch-1",
     "ngGeolocation": "rjmackay/ngGeolocation",
     "nvd3": "^1.8.3",
-    "platform-pattern-library": "ushahidi/project-pheme-pattern-library#1d33601",
+    "platform-pattern-library": "ushahidi/project-pheme-pattern-library#4a1da81",
     "selection-model": "jtrussell/angular-selection-model.git",
     "underscore": "^1.7.0"
   },

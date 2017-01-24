@@ -1,5 +1,6 @@
 <div>
     <layout-class layout="b"></layout-class>
+
     <div class="mode-context init" dropdown>
         <header class="mode-context-header">
             <h1 class="mode-context-title" translate>pheme.topic.topics</h1>
@@ -18,6 +19,7 @@
             <span class="label hidden" translate>app.show_more_less</span>
         </span>
     </div>
+
     <main role="main" class="topics">
         <div class="main-col">
 
@@ -28,6 +30,8 @@
                 </svg>
                 <input type="search" placeholder="Explore Social Media" ng-model="searchKeywords" ng-keyup="$event.keyCode == 13 && keywordSearch()" ng-change="keywordChange()">
             </div>
+
+            <button ng-click="navigateCreate()" class="button button-alpha" translate>pheme.topic.add</button>
 
             <!-- Keyword search results -->
             <div ng-show="showResults == 'live' && liveResults.status == 'loading'">
@@ -100,7 +104,6 @@
                 </listing-toolbar>
            </div>
            <div>
-           <button ng-click="navigateCreate()" class="button button-alpha" translate>pheme.topic.add</button>
            </div>
      	</div>
     </main>
