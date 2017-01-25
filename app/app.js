@@ -21,6 +21,7 @@ window.d3 = require('d3'); // Required for nvd3
 require('./common/wrapper/nvd3-wrapper');
 require('angular-nvd3/src/angular-nvd3');
 require('angular-cache');
+require('angular-fallback-image');
 
 // Load ushahidi modules
 require('./frame/frame-module.js');
@@ -71,6 +72,7 @@ angular.module('app',
         'pascalprecht.translate',
         'ui.bootstrap.pagination',
         'angular-datepicker',
+        'angular-fallback-image',
         'leaflet-directive',
         'angular.filter',
         'showdown',

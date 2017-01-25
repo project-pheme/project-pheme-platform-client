@@ -67,7 +67,7 @@
               <h2 class="form-label" translate>pheme.pheme.threads</h2>
               <div class="listing-item-primary tweet" ng-repeat="thread in theme.threads | startFrom:current_thread_page*5 | limitTo:5">
                 <div class="listing-item-image">
-                    <img class="avatar" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
+                    <img class="avatar" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
                 </div>
                 <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
                 <p class="listing-item-secondary" ng-bind="thread.featured_tweet.user.user_description"></p>
