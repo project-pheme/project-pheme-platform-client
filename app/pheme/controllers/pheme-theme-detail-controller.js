@@ -1,7 +1,34 @@
 module.exports = PhemeThemeDetailController;
 
-PhemeThemeDetailController.$inject = ['$scope', '$controller', '$translate', '$routeParams', 'FormAttributeEndpoint', 'TagEndpoint', 'post', 'theme', '$log'];
-function PhemeThemeDetailController($scope, $controller, $translate, $routeParams, FormAttributeEndpoint, TagEndpoint, post, theme, $log) {
+PhemeThemeDetailController.$inject = [
+    '$scope',
+    '$controller',
+    '$translate',
+    '$routeParams',
+    'FormAttributeEndpoint',
+    'TagEndpoint',
+    'Maps',
+    'leafletData',
+    'post',
+    'theme',
+    '$log',
+    '$q',
+    '_' ];
+function PhemeThemeDetailController(
+    $scope,
+    $controller,
+    $translate,
+    $routeParams,
+    FormAttributeEndpoint,
+    TagEndpoint,
+    Maps,
+    leafletData,
+    post,
+    theme,
+    $log,
+    $q,
+    _
+) {
 
     $scope.post = post;
     $scope.theme = theme;
@@ -30,5 +57,59 @@ function PhemeThemeDetailController($scope, $controller, $translate, $routeParam
         thread.featured_tweet.veracity_score = parseFloat(thread.featured_tweet.veracity_score || '0.0');
     });
     $scope.current_thread_page = 0;
+
+    // MAP rendering
+
+    // Set initial map params
+    angular.extend($scope, Maps.getInitialScope());
+    // Load map params, including config from server (async)
+    var config = Maps.getAngularScopeParams();
+    config.then(function (params) {
+        angular.extend($scope, params);
+        if (theme.locations.authors.length) {
+            $scope.mapDataLoaded = true;
+        }
+    });
+
+    // Transform author location data to geojson
+    var authorLocations = theme.locations.authors;
+    $scope.geojson = {
+        onEachFeature: function (feature, layer) {
+            var key = feature.properties.text;
+            layer.bindPopup(key);
+        }
+    };
+    $scope.geojson.data = _.map(authorLocations, function(loc) {
+        return {
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: [ loc.long, loc.lat ]
+            },
+            properties: {
+                text: loc.text,
+                user: loc.userHandle
+            }
+        }
+    });
+    $log.info($scope.geojson);
+
+    // Show map once data loaded
+    $q.all({
+        map: leafletData.getMap('post-map'),
+        geojson: leafletData.getGeoJSON('post-map')
+    })
+    // Set map options, add layers, and set bounds
+    .then(function (data) {
+        // Disable 'Leaflet prefix on attributions'
+        data.map.attributionControl.setPrefix(false);
+
+        // Center map on geojson
+        data.map.fitBounds(data.geojson.getBounds());
+        // Avoid zooming further than 15 (particularly when we just have a single point)
+        if (data.map.getZoom() > 15) {
+            data.map.setZoom(15);
+        }
+    });
 
 }

@@ -27,7 +27,12 @@
 			"publications": "Linked Publications",
 			"images": "Linked Images",
 			"places": "Places",
-			"topic_label" : "Topic" 
+			"topic_label" : "Topic",
+			"veracity": "Veracity",
+			"true": "true",
+			"false": "false",
+			"confidence": "confidence",
+			"uncertain": "uncertain"
 		},
 		"sort": {
 			"updated": "Updated",

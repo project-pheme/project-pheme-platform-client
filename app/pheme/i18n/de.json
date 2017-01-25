@@ -27,7 +27,12 @@
 			"publications": "Verlinkte Publikationen",
 			"images": "Verlinkte Bilder",
 			"places": "Ortsangaben",
-			"topic_label": "!!Topic"
+			"topic_label": "!!Topic",
+			"veracity": "!!Veracity",
+			"true": "!!true",
+			"false": "!!false",
+			"confidence": "!!confidence",
+			"uncertain": "!!uncertain"
 		},
 		"sort": {
 			"updated": "Aktualisiert",

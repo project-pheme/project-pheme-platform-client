@@ -72,7 +72,10 @@
                 <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
                 <p class="listing-item-secondary" ng-bind="thread.featured_tweet.user.user_description"></p>
                 <p class="listing-item-secondary">{{ thread.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="{{ thread.uri }}" target="_blank">open in twitter</a></p>
-                <p class="listing-item-secondary" ng-show="thread.featured_tweet.veracity_score > 0.5"><b>Veracity</b>: {{ thread.featured_tweet.veracity }} ({{ thread.featured_tweet.veracity_score * 100 | number:0 }}% confidence)</p>
+                <p class="listing-item-secondary"><b>{{ 'pheme.veracity' | translate }}</b>:
+                  <span ng-if="thread.featured_tweet.veracity_score >= 0.95">{{ thread.featured_tweet.veracity }} ({{ thread.featured_tweet.veracity_score * 100 | number:0 }}% {{ 'pheme.confidence' | translate }})</span>
+                  <span ng-if="thread.featured_tweet.veracity_score < 0.95">{{ 'pheme.uncertain' | translate }}</span>
+                </p>
                 <p ng-bind="thread.featured_tweet.text" linkify="twitter"><p>
               </div>
               <uib-pagination ng-model="current_thread_page" items-per-page="10" total-items="theme.threads.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
@@ -110,18 +113,15 @@
             <div class="postcard-field">
               <h2 class="form-label" translate>pheme.pheme.places</h2>
             </div>
-            <!-- maps
             <div
               ng-if="mapDataLoaded"
-              ng-show="visibleStage == stages[0].id || visibleStage == 'post'"
               class="postcard-field"
               >
-              <h2 ng-if="mapDataLoaded" class="form-label" translate>post.location</h2>
+              <!--<h2 ng-if="mapDataLoaded" class="form-label" translate>post.location</h2>-->
               <div ng-if="mapDataLoaded">
                 <leaflet id="post-map" class="map" defaults="defaults" geojson="geojson" center="center" layers="layers"></leaflet>
               </div>
             </div>
-            -->
           </div>
         </div>
       </div>
