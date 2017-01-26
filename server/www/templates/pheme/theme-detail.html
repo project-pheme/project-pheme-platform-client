@@ -41,27 +41,27 @@
           <!-- values -->
 
           <div class="listing-summary clearfix">
-            <div class="listing-summary-block"> 
+            <div class="listing-summary-block">
                 <h2 class="form-label">Overview</h2>
-                <p><translate>pheme.pheme.number_images</translate>: {{ post.values['theme-img-count'][0] }}</p> 
-                <p><translate>pheme.pheme.number_publications</translate>: {{ post.values['theme-pub-count'][0] }}</p>  
-                <p><translate>pheme.pheme.verified_authors</translate>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }}</p> 
+                <p><translate>pheme.pheme.number_images</translate>: {{ post.values['theme-img-count'][0] }}</p>
+                <p><translate>pheme.pheme.number_publications</translate>: {{ post.values['theme-pub-count'][0] }}</p>
+                <p><translate>pheme.pheme.verified_authors</translate>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }}</p>
                 <p><translate>pheme.pheme.controversiality</translate>: {{ post.values['theme-controversiality'][0] * 100 | number:0}}% </p>
             </div>
 
-            <div class="listing-summary-block"> 
-              <h2 class="form-label">Activity</h2> 
-              <p><translate>pheme.pheme.start_date</translate>: {{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</p>  
+            <div class="listing-summary-block">
+              <h2 class="form-label">Activity</h2>
+              <p><translate>pheme.pheme.start_date</translate>: {{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</p>
               <p><translate>pheme.pheme.end_date</translate>: {{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</p>
             </div>
 
-            <div class="listing-summary-block"> 
-              <h2 class="form-label">Tweets</h2> 
-              <p><translate>pheme.pheme.size</translate>: {{ post.values['theme-size'][0] }} tweets</i></p> 
+            <div class="listing-summary-block">
+              <h2 class="form-label">Tweets</h2>
+              <p><translate>pheme.pheme.size</translate>: {{ post.values['theme-size'][0] }} tweets</i></p>
               <p><translate>pheme.pheme.average_activity</translate>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/min</i></p>
             </div>
           </div>
- 
+
           <div class="listings" ng-show="visibleTab == 'threads'">
             <div class="listing-item">
               <h2 class="form-label" translate>pheme.pheme.threads</h2>
@@ -69,7 +69,7 @@
                 <div class="listing-item-image">
                     <img class="avatar" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
                 </div>
-                <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2> 
+                <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2>
                 <p class="listing-item-secondary" ng-bind="thread.featured_tweet.user.user_description"></p>
                 <p class="listing-item-secondary">{{ thread.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="{{ thread.uri }}" target="_blank">open in twitter</a></p>
                 <p class="listing-item-secondary"><b>{{ 'pheme.veracity' | translate }}</b>:
@@ -95,21 +95,21 @@
             </div>
           </div>
 
-          <div ng-show="visibleTab == 'images'">
-            <div class="postcard-field"> 
+          <div class="listings" ng-show="visibleTab == 'images'">
+            <div class="postcard-field">
               <h2 class="form-label" translate>pheme.pheme.images</h2>
             </div>
             <div class="gallery">
-              <div style="float:left ; border-right: 5px" class="gallery-thumb" ng-repeat="img in theme.images">
+              <div class="gallery-thumb" ng-repeat="img in theme.images">
                 <figure>
-                  <a ng-href="{{ img.imgUrl }}" target="_blank"><img class="avatar" ng-src="{{ img.imgUrl }}" width="128" height="128'" style="object-fit: cover;" alt=""></a> 
+                  <a ng-href="{{ img.imgUrl }}" target="_blank"><img class="avatar" ng-src="{{ img.imgUrl }}" width="128" height="128'" style="object-fit: cover;" alt=""></a>
                   <span class="image-count">{{ img.count }}</span>
                 </figure>
               </div>
             </div>
           </div>
 
-          <div ng-show="visibleTab == 'places'">
+          <div class="listings" ng-show="visibleTab == 'places'">
             <div class="postcard-field">
               <h2 class="form-label" translate>pheme.pheme.places</h2>
             </div>

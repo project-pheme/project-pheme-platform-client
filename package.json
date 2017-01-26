@@ -80,7 +80,6 @@
     "angular-cache": "^4.6.0",
     "angular-datepicker": "alongubkin/angular-datepicker.git",
     "angular-elastic": "^2.5.1",
-    "angular-fallback-image": "^1.2.0",
     "angular-filter": "^0.5.4",
     "angular-lazy-bootstarp": "rajeshsegu/angular-lazy-bootstrap",
     "angular-leaflet-directive": "tombatossals/angular-leaflet-directive.git#v0.8.1",
