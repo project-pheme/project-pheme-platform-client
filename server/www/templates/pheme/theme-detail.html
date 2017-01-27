@@ -34,7 +34,7 @@
             <div class="listing-summary-block">
               <h2 class="form-label" translate>pheme.topic.topic</h2>
               <p ng-repeat="category in post.tags">
-                {{category.tag}}
+                <span class="topic-label" ng-class="'topic-color-' + (category.id % 10)">{{ category.tag }}</span>
               </p>
             </div>
           </div>
