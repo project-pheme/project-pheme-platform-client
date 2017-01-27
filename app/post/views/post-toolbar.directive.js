@@ -15,12 +15,12 @@ function PostToolbarDirective() {
 PostToolbarController.$inject = ['$scope'];
 function PostToolbarController($scope) {
 
-	$scope.vOrderbyOptions = [
-        { value: "theme-last-activity", label: "pheme.sort.updated" },
-        { value: "theme-size", label: "pheme.sort.size" },
-        { value: "theme-controversiality", label: "pheme.sort.controversiality" },
-        { value: "theme-img-count", label: "pheme.sort.images" },
-        { value: "theme-pub-count", label: "pheme.sort.publications" }
+    $scope.vOrderbyOptions = [
+        { value: 'theme-last-activity', label: 'pheme.sort.updated' },
+        { value: 'theme-size', label: 'pheme.sort.size' },
+        { value: 'theme-controversiality', label: 'pheme.sort.controversiality' },
+        { value: 'theme-img-count', label: 'pheme.sort.images' },
+        { value: 'theme-pub-count', label: 'pheme.sort.publications' }
     ];
 
     $scope.vOrderbyChanged = function (selection) {
@@ -28,7 +28,7 @@ function PostToolbarController($scope) {
     };
 
     $scope.setOrder = function (value) {
-    	$scope.filters.order = value;
-    }
+        $scope.filters.order = value;
+    };
 
 }

@@ -11,7 +11,7 @@ function (
         query: {
             method: 'GET',
             isArray: true
-        },
+        }
     });
 
     return PhemeSearchLiveEndpoint;

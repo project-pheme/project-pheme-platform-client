@@ -53,11 +53,11 @@ function PostListController(
 
     // sorting controls
     $scope.vOrderbyOptions = [
-        { value: "theme-last-activity", label: "pheme.sort.updated" },
-        { value: "theme-size", label: "pheme.sort.size" },
-        { value: "theme-controversiality", label: "pheme.sort.controversiality" },
-        { value: "theme-img-count", label: "pheme.sort.images" },
-        { value: "theme-pub-count", label: "pheme.sort.publications" }
+        { value: 'theme-last-activity', label: 'pheme.sort.updated' },
+        { value: 'theme-size', label: 'pheme.sort.size' },
+        { value: 'theme-controversiality', label: 'pheme.sort.controversiality' },
+        { value: 'theme-img-count', label: 'pheme.sort.images' },
+        { value: 'theme-pub-count', label: 'pheme.sort.publications' }
     ];
 
     $scope.vOrderbyChanged = function (selection) {

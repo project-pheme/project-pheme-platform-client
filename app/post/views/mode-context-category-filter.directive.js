@@ -22,7 +22,7 @@ function ModeContextCategoryFilter($scope, TagEndpoint, PostEndpoint, $q, _) {
     function activate() {
         // Flush TagEndpoint cache
         TagEndpoint.invalidateCache();
-        
+
         // Load forms
         $scope.categories = TagEndpoint.query();
         var postCountRequest = PostEndpoint.stats({ group_by: 'tags', status: 'all' });

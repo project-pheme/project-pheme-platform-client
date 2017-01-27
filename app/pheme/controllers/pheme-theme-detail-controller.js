@@ -13,7 +13,8 @@ PhemeThemeDetailController.$inject = [
     'theme',
     '$log',
     '$q',
-    '_' ];
+    '_'
+];
 function PhemeThemeDetailController(
     $scope,
     $controller,
@@ -53,7 +54,7 @@ function PhemeThemeDetailController(
     };
 
     // Transform some data values
-    (theme.threads || []).forEach( function(thread) {
+    (theme.threads || []).forEach(function (thread) {
         thread.featured_tweet.veracity_score = parseFloat(thread.featured_tweet.veracity_score || '0.0');
     });
     $scope.current_thread_page = 0;
@@ -79,18 +80,18 @@ function PhemeThemeDetailController(
             layer.bindPopup(key);
         }
     };
-    $scope.geojson.data = _.map(authorLocations, function(loc) {
+    $scope.geojson.data = _.map(authorLocations, function (loc) {
         return {
-            type: "Feature",
+            type: 'Feature',
             geometry: {
-                type: "Point",
-                coordinates: [ loc.long, loc.lat ]
+                type: 'Point',
+                coordinates: [loc.long, loc.lat]
             },
             properties: {
                 text: loc.text,
                 user: loc.userHandle
             }
-        }
+        };
     });
     $log.info($scope.geojson);
 

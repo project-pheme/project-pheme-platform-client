@@ -3,7 +3,7 @@ module.exports = PhemePostViewsController;
 PhemePostViewsController.$inject = ['$scope', '$controller', '$translate', '$routeParams', 'PostFilters', 'PhemePostViewService'];
 function PhemePostViewsController($scope, $controller, $translate, $routeParams, PostFilters, PhemePostViewService) {
 
-	// --- copied from original controller
+    // --- copied from original controller
     // Set view based out route
     $scope.currentView = $routeParams.view;
     $scope.postType = $routeParams.type;
@@ -22,7 +22,7 @@ function PhemePostViewsController($scope, $controller, $translate, $routeParams,
 
     // TODO: add implicit filter based on the type route parameter
 
-	// Custom pheme stuff goes here...
+    // Custom pheme stuff goes here...
 
     // Set the custom page title
     $translate('post.posts').then(function (title) {

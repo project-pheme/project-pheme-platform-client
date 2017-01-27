@@ -20,16 +20,16 @@ function (
             transformResponse: function (data /*, header*/) {
                 data = Util.transformResponse(data).results;
                 var newData = [];
-                for ( eventId in data ) {
+                for (var eventId in data) {
                     var event = data[eventId];
-                    event.name = event.display_name
+                    event.name = event.display_name;
                     event.id = event._id;
                     event['capture-end-date'] = new Date(event['capture-end-date']);
                     newData.push(event);
                 }
                 return newData;
             }
-        },
+        }
     });
 
     return PhemeEventsEndpoint;

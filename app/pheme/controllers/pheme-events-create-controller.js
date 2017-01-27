@@ -37,14 +37,14 @@ function (
     $scope.event = {
         type: 'pheme-event',
         icon: 'tag',
-        keywords: [ {id: 1, text: ($routeParams.keywords || "")} ]
+        keywords: [{id: 1, text: ($routeParams.keywords || '')}]
     };
     $scope.processing = false;
 
     $scope.addKeywordField = function () {
-        var newItemNo = $scope.event.keywords.length+1;
-        $scope.event.keywords.push({id: newItemNo, text: ""});
-    }
+        var newItemNo = $scope.event.keywords.length + 1;
+        $scope.event.keywords.push({id: newItemNo, text: ''});
+    };
 
     $scope.saveEvent = function (event) {
         $scope.processing = true;
@@ -53,16 +53,18 @@ function (
         var event_obj = {
             name: event.name,
             description: event.description,
-            type: "search",
+            type: 'search',
             dataSources: []
         };
 
-        var keywords = _.filter(_.pluck(event.keywords, 'text'), function(x) { return x && x.trim() != ""; });
+        var keywords = _.filter(_.pluck(event.keywords, 'text'), function (x) {
+            return x && x.trim() !== '';
+        });
 
-        _.each(keywords, function(kw) {
+        _.each(keywords, function (kw) {
             event_obj.dataSources.push({
                 twitter: {
-                    type: "Twitter",
+                    type: 'Twitter',
                     keywords: kw
                 }
             });

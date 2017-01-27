@@ -370,7 +370,7 @@ gulp.task('bump', function () {
  */
 gulp.task('tar', ['build'], function () {
     var version = gutil.env['version-suffix'] || require('./package.json').version;
-    var dest_dir = gutil.env['dest-dir'] || 'build'
+    var dest_dir = gutil.env['dest-dir'] || 'build';
 
     return gulp.src('server/www/**')
         .pipe(rename(function (path) {
@@ -491,36 +491,36 @@ gulp.task('transifex-download', function () {
     });
 });
 
-gulp.task('i18n-pre', function() {
+gulp.task('i18n-pre', function () {
     gulp.src(transifex_dir + '/languages.json')
         .pipe(gulp.dest(locales_dir));
 });
 
-gulp.task('i18n-en', ['i18n-pre'], function() {
+gulp.task('i18n-en', ['i18n-pre'], function () {
     var src1 = gulp.src(transifex_dir + '/en.json');
     var src2 = gulp.src('./app/pheme/i18n/en.json');
     mergeStream(src1, src2)
-        .pipe(mergeJson("en.json"))
+        .pipe(mergeJson('en.json'))
         .pipe(gulp.dest(locales_dir));
 });
 
-gulp.task('i18n-en-us', ['i18n-pre'], function() {
+gulp.task('i18n-en-us', ['i18n-pre'], function () {
     var src1 = gulp.src(transifex_dir + '/en-US.json');
     var src2 = gulp.src('./app/pheme/i18n/en.json');
     mergeStream(src1, src2)
-        .pipe(mergeJson("en-US.json"))
+        .pipe(mergeJson('en-US.json'))
         .pipe(gulp.dest(locales_dir));
 });
 
-gulp.task('i18n-de', ['i18n-pre'], function() {
+gulp.task('i18n-de', ['i18n-pre'], function () {
     var src1 = gulp.src(transifex_dir + '/de.json');
     var src2 = gulp.src('./app/pheme/i18n/de.json');
     mergeStream(src1, src2)
-        .pipe(mergeJson("de.json"))
+        .pipe(mergeJson('de.json'))
         .pipe(gulp.dest(locales_dir));
 });
 
-gulp.task('i18n', [ 'i18n-en', 'i18n-en-us', 'i18n-de' ]);
+gulp.task('i18n', ['i18n-en', 'i18n-en-us', 'i18n-de']);
 
 /**
  * Task: `default`

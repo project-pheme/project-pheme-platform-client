@@ -67,8 +67,8 @@ function PostFiltersService(_, FormEndpoint) {
             form: _.pluck(forms, 'id'),
             set: [],
             user: false,
-            v_orderby: "theme-controversiality",
-            order: "desc"
+            v_orderby: 'theme-controversiality',
+            order: 'desc'
         };
     }
 

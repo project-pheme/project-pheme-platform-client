@@ -48,10 +48,12 @@ function (
     $scope.refreshView = function () {
         PhemeEventsEndpoint.query().$promise.then(function (events) {
             // Sort events in descending order by "updated"
-            events.forEach(function(event) {
+            events.forEach(function (event) {
                 event.updated = Date.parse(event.updated);
             });
-            events.sort(function (e1, e2) { return e2.updated - e1.updated; });
+            events.sort(function (e1, e2) {
+                return e2.updated - e1.updated;
+            });
             $scope.events = events;
         }).catch(function (error) {
             $log.error('events-controller err: ' + error);
@@ -98,5 +100,4 @@ function (
             $scope.liveResults.pag.current = 0;
         });
     };
-    
 }];
