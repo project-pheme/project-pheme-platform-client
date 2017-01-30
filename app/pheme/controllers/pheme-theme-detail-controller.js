@@ -2,6 +2,7 @@ module.exports = PhemeThemeDetailController;
 
 PhemeThemeDetailController.$inject = [
     '$scope',
+    '$rootScope',
     '$controller',
     '$translate',
     '$routeParams',
@@ -17,6 +18,7 @@ PhemeThemeDetailController.$inject = [
 ];
 function PhemeThemeDetailController(
     $scope,
+    $rootScope,
     $controller,
     $translate,
     $routeParams,
@@ -31,6 +33,7 @@ function PhemeThemeDetailController(
     _
 ) {
 
+    $rootScope.setLayout('layout-c');
     $scope.post = post;
     $scope.theme = theme;
 

@@ -63,23 +63,63 @@
           </div>
 
           <div class="listings" ng-show="visibleTab == 'threads'">
-            <div class="listing-item">
-              <h2 class="form-label" translate>pheme.pheme.threads</h2>
-              <div class="listing-item-primary tweet" ng-repeat="thread in theme.threads | startFrom:current_thread_page*5 | limitTo:5">
-                <div class="listing-item-image">
-                    <img class="avatar" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
+                <div class="postcard-field">
+                    <h2 class="form-label" translate>pheme.pheme.threads</h2>
                 </div>
-                <h2 class="listing-item-title"><a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">@{{ thread.featured_tweet.user.user_screen_name }}</a><span style="font-size: -25%" ng-if="thread.featured_tweet.user.is_verified">&nbsp;(verified user)<span></h2>
-                <p class="listing-item-secondary" ng-bind="thread.featured_tweet.user.user_description"></p>
-                <p class="listing-item-secondary">{{ thread.featured_tweet.date | date:'yyyy-MM-dd HH:mm' }}&nbsp;&nbsp;<a ng-href="{{ thread.uri }}" target="_blank">open in twitter</a></p>
-                <p class="listing-item-secondary"><b>{{ 'pheme.veracity' | translate }}</b>:
-                  <span ng-if="thread.featured_tweet.veracity_score >= 0.95">{{ thread.featured_tweet.veracity }} ({{ thread.featured_tweet.veracity_score * 100 | number:0 }}% {{ 'pheme.confidence' | translate }})</span>
-                  <span ng-if="thread.featured_tweet.veracity_score < 0.95">{{ 'pheme.uncertain' | translate }}</span>
-                </p>
-                <p ng-bind="thread.featured_tweet.text" linkify="twitter"><p>
-              </div>
-              <uib-pagination ng-model="current_thread_page" items-per-page="10" total-items="theme.threads.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
-            </div>
+
+                <div class="listing tweet">
+                    <div class="listing-item">
+
+                      <div class="listing-item-primary tweet card" ng-repeat="thread in theme.threads | startFrom:current_thread_page*5 | limitTo:5">
+
+                        <div class="listing-item-image">
+                            <img class="avatar" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
+                        </div>
+
+                        <h2 class="listing-item-title">
+                            <a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">
+                                <span class="tweet-name" ng-bind="thread.featured_tweet.user.user_description"></span>
+                                <span class="tweet-username">@{{ thread.featured_tweet.user.user_screen_name }}</span>
+                            </a>
+
+                            <span class="tweet-verified" ><img src="https://ton.twitter.com/hc_assets/1307051244_737.png" width="23" height="23"><span>
+                        </h2>
+
+                        <p class="listing-item-secondary tweet-veracity">
+                            <b translate>pheme.pheme.veracity</b>:
+
+                            <span ng-if="thread.featured_tweet.veracity_score >= 0.95">
+                                <svg class="iconic confidence">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#circle-check"></use>
+                                </svg>
+
+                                {{ thread.featured_tweet.veracity }}
+                                ({{ thread.featured_tweet.veracity_score * 100 | number:0 }}% {{ 'pheme.confidence' | translate }})
+                            </span>
+
+                            <span ng-if="thread.featured_tweet.veracity_score < 0.95">
+                                <svg class="iconic uncertain">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#circle-x"></use>
+                                </svg>
+
+                                {{ thread.featured_tweet.veracity }}
+                                ({{ 'pheme.uncertain' | translate }})
+                            </span>
+
+                        </p>
+
+                        <p ng-bind="thread.featured_tweet.text" linkify="twitter"><p>
+
+                        <p class="tweet-date">{{ thread.featured_tweet.date | date:'h:mm a - d MMM y' }}
+                            <a class="tweet-open" ng-href="{{ thread.uri }}" target="_blank">open in twitter</a>
+                        </p>
+
+                      </div>
+
+                      <uib-pagination ng-model="current_thread_page" items-per-page="10" total-items="theme.threads.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
+
+                    </div>
+                </div>
           </div>
 
 
