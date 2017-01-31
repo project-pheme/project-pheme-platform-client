@@ -15,27 +15,33 @@
           <div class="listing-summary-wrapper">
               <div class="listing-summary-block">
                    <h2 class="form-label">Overview</h2>
-                    <p><translate>pheme.pheme.topic_label</translate>: <span class="topic-label" ng-class="'topic-color-' + (post.tags[0].$t.id % 10)">{{ post.tags[0].$t.tag }}</span></p>
-                    <p><translate>pheme.pheme.number_images</translate>: {{ post.values['theme-img-count'][0] }}</p>
-                    <p><translate>pheme.pheme.number_publications</translate>: {{ post.values['theme-pub-count'][0] }}</p>
-                    <p><translate>pheme.pheme.verified_authors</translate>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p>
-                    <p><translate>pheme.pheme.controversiality</translate>: {{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</p>
+                    <p><b translate>pheme.pheme.topic_label</b>: <span class="topic-label" ng-class="'topic-color-' + (post.tags[0].$t.id % 10)">{{ post.tags[0].$t.tag }}</span></p>
+                    <p><b translate>pheme.pheme.number_images</b>: {{ post.values['theme-img-count'][0] }}</p>
+                    <p><b translate>pheme.pheme.number_publications</b>: {{ post.values['theme-pub-count'][0] }}</p>
+                    <p><b translate>pheme.pheme.verified_authors</b>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p>
+                    <p><b translate>pheme.pheme.controversiality</b>:
+                        <span class="green" ng-if="post.values['theme-controversiality'][0] < 0.33">
+                            <b>{{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</b>
+                        </span>
+                        <span class="yellow" ng-if="post.values['theme-controversiality'][0] >= 0.33 && post.values['theme-controversiality'][0] < 0.67">
+                            <b>{{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</b>
+                        </span>
+                        <span class="red" ng-if="post.values['theme-controversiality'][0] >= 0.67">
+                            <b>{{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</b>
+                        </span>
+                    </p>
               </div>
 
               <div class="listing-summary-block">
                   <h2 class="form-label">Activity</h2>
-                  <p><translate>pheme.pheme.start_date</translate>: <em>{{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
-                  <p><translate>pheme.pheme.end_date</translate>: <em>{{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
+                  <p><b translate>pheme.pheme.size</b>: {{ post.values['theme-size'][0] }} tweets</i></p>
+                  <p><b translate>pheme.pheme.average_activity</b>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/min</i></p>
+                  <p><b translate>pheme.pheme.start_date</b>: <em>{{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
+                  <p><b translate>pheme.pheme.end_date</b>: <em>{{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
               </div>
           </div>
 
           <div class="listing-summary-wrapper">
-              <div class="listing-summary-block">
-                  <h2 class="form-label">Tweets</h2>
-                  <p><translate>pheme.pheme.size</translate>: {{ post.values['theme-size'][0] }} tweets</i></p>
-                  <p><translate>pheme.pheme.average_activity</translate>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/min</i></p>
-              </div>
-
               <div class="listing-summary-block" ng-if="post.values['theme-most-shared-img'][0] != ''">
                   <h2 class="form-label">Most Shared Image</h2>
                   <a ng-href="{{ post.values['theme-most-shared-img'][0] }}" target="_blank">
