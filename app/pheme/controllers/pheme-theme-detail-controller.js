@@ -50,6 +50,8 @@ function PhemeThemeDetailController(
     });
 
     $scope.post.featured_tweet = JSON.parse($scope.post.values['theme-featured-tweet'][0]);
+    $scope.post.values['theme-start-date'][0] = new Date($scope.post.values['theme-start-date'][0]);
+    $scope.post.values['theme-last-activity'][0] = new Date($scope.post.values['theme-last-activity'][0]);
 
     $scope.visibleTab = 'threads';
     $scope.setVisibleTab = function (tabId) {
@@ -96,7 +98,6 @@ function PhemeThemeDetailController(
             }
         };
     });
-    $log.info($scope.geojson);
 
     // Show map once data loaded
     $q.all({

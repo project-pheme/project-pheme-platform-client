@@ -35,9 +35,9 @@
               <div class="listing-summary-block">
                   <h2 class="form-label">Activity</h2>
                   <p><b translate>pheme.pheme.size</b>: {{ post.values['theme-size'][0] }} tweets</i></p>
-                  <p><b translate>pheme.pheme.average_activity</b>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/min</i></p>
-                  <p><b translate>pheme.pheme.start_date</b>: <em>{{ post.values['theme-start-date'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
-                  <p><b translate>pheme.pheme.end_date</b>: <em>{{ post.values['theme-last-activity'][0] | date:'yyyy-MM-dd HH:mm' }}</em></p>
+                  <p><b translate>pheme.pheme.average_activity</b>: {{ post.values['theme-average-activity'][0] | number:2 }} tweets/second</i></p>
+                  <p><b translate>pheme.pheme.start_date</b>: <em>{{ post.values['theme-start-date'][0] | date:'h:mm a - d MMM y' }}</em></p>
+                  <p><b translate>pheme.pheme.end_date</b>: <em>{{ post.values['theme-last-activity'][0] | date:'h:mm a - d MMM y' }}</em></p>
               </div>
           </div>
 

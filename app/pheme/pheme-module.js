@@ -51,6 +51,8 @@ angular.module('ushahidi.pheme', ['linkify'])
                     // process the contents of the theme post type
                     try {
                         $scope.post.featured_tweet = JSON.parse($scope.post.values['theme-featured-tweet'][0]);
+                        $scope.post.values['theme-start-date'][0] = new Date($scope.post.values['theme-start-date'][0]);
+                        $scope.post.values['theme-last-activity'][0] = new Date($scope.post.values['theme-last-activity'][0]);
                     } catch (e) {
                         // silent failure
                     }
