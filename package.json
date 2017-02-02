@@ -104,6 +104,7 @@
     "moment-timezone": "^0.5.4",
     "ng-showdown": "rjmackay/ng-showdown#patch-1",
     "ngGeolocation": "rjmackay/ngGeolocation",
+    "ngtweet": "^0.6.1",
     "nvd3": "^1.8.3",
     "platform-pattern-library": "ushahidi/project-pheme-pattern-library#04b4490",
     "selection-model": "jtrussell/angular-selection-model.git",
