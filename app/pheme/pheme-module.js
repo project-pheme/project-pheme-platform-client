@@ -72,7 +72,7 @@ angular.module('ushahidi.pheme', ['linkify', 'ngtweet'])
                 });
                 $scope.openTwitterModal = function () {
                     ModalService.openTemplate('<twitter-modal tweetId="' + $scope.post.featured_tweet.id + '"></twitter-modal>', '', 'star', $scope, true, true);
-                }
+                };
             }];
             return $delegate;
         }

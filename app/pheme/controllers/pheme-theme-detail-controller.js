@@ -10,6 +10,7 @@ PhemeThemeDetailController.$inject = [
     'TagEndpoint',
     'Maps',
     'leafletData',
+    'ModalService',
     'post',
     'theme',
     '$log',
@@ -26,6 +27,7 @@ function PhemeThemeDetailController(
     TagEndpoint,
     Maps,
     leafletData,
+    ModalService,
     post,
     theme,
     $log,
@@ -63,6 +65,11 @@ function PhemeThemeDetailController(
         thread.featured_tweet.veracity_score = parseFloat(thread.featured_tweet.veracity_score || '0.0');
     });
     $scope.current_thread_page = 0;
+
+    $scope.openTwitterModal = function (tweetId) {
+        ModalService.openTemplate('<twitter-modal tweetId="' + tweetId + '"></twitter-modal>', '', 'star', $scope, true, true);
+    };
+
 
     // MAP rendering
 
