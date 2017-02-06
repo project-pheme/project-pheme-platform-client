@@ -106,7 +106,7 @@
     "ngGeolocation": "rjmackay/ngGeolocation",
     "ngtweet": "^0.6.1",
     "nvd3": "^1.8.3",
-    "platform-pattern-library": "ushahidi/project-pheme-pattern-library#4164e30",
+    "platform-pattern-library": "ushahidi/project-pheme-pattern-library#2dfeb02",
     "selection-model": "jtrussell/angular-selection-model.git",
     "underscore": "^1.7.0"
   },
