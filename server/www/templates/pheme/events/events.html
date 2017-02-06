@@ -92,7 +92,7 @@
                     <p ng-hide="events.length"><em translate>pheme.topic.empty</em></p>
                 </div>
 
-                <div id="pheme-{{event.id}}" class="listing-item" ng-repeat="event in events | orderBy:'category_id'" ng-class="{ 'warning': isToggled(event) }" ng-click="toggleEvent(event)">
+                <div id="pheme-{{event.id}}" class="listing-item" ng-repeat="event in events | orderBy:'category_id'" ng-class="{ 'warning': isToggled(event) }">
 
                     <!--
                     <div class="listing-item-select">
@@ -101,7 +101,7 @@
                     -->
 
                     <div class="listing-item-primary">
-                        <h2 class="listing-item-title"><!--<a ng-href="/settings/categories/{{category.id}}">-->{{event.name}}<!--</a>--></h2>
+                        <h2 class="listing-item-title"><a ng-href="/pheme/posts/themes/list?tags={{ event.category_id }}">{{event.name}}</a></h2>
                         <p class="listing-item-secondary topic-description">{{event.description}}</p>
                         <p class="listing-item-secondary">Last activity: {{ event.updated > 0 ? (event.updated | date:'h:mm a - d MMM y') : "never" }}</p>
                         <p class="listing-item-secondary">Capturing until: {{ event['capture-end-date'] | date:'h:mm a - d MMM y' }}</p>

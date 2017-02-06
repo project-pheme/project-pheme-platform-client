@@ -9,7 +9,8 @@
                 <svg class="iconic" style="fill: #ffffff" ng-show="category.capture_status == 'capturing'"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#media-play"></use></svg>
                 <svg class="iconic" style="fill: #ffffff" ng-show="category.capture_status == 'stopped'"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#media-pause"></use></svg>
 
-                {{ ::category.tag }}
+                <span ng-show="isFilterable">{{ ::category.tag }}</span>
+                <span ng-hide="isFilterable"><a ng-href="/pheme/posts/themes/list?tags={{ category.id }}" style="color: #ffffff">{{ ::category.tag }}</span>
             </label>
         </div>
 

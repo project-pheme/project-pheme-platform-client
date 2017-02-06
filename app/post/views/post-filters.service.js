@@ -1,7 +1,7 @@
 module.exports = PostFiltersService;
 
-PostFiltersService.$inject = ['_', 'FormEndpoint'];
-function PostFiltersService(_, FormEndpoint) {
+PostFiltersService.$inject = ['_', 'FormEndpoint', '$location', '$log'];
+function PostFiltersService(_, FormEndpoint, $location, $log) {
     // Create initial filter state
     var filterState = window.filterState = getDefaults();
     var forms = [];
@@ -32,6 +32,18 @@ function PostFiltersService(_, FormEndpoint) {
 
     // Get filterState
     function getFilters() {
+        var tags = $location.search().tags;
+        if (tags) {
+            $location.search('tags', undefined);
+            if (tags && typeof (tags) === 'string' && tags !== '') {
+                tags = tags.split(/\s+/).map(function (x) {
+                    return Number(x);
+                });
+                if (tags.length > 0) {
+                    filterState.tags = tags;
+                }
+            }
+        }
         return filterState;
     }
 
