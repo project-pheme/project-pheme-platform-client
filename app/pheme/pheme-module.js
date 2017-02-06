@@ -6,11 +6,12 @@ angular.module('ushahidi.pheme', ['linkify', 'ngtweet'])
 .service('PhemeEventsEndpoint', require('./services/endpoints/events.js'))
 .service('PhemeThemesEndpoint', require('./services/endpoints/themes.js'))
 .service('PhemeSearchLiveEndpoint', require('./services/endpoints/searchlive.js'))
+.service('PhemeDatachannelsEndpoint', require('./services/endpoints/datachannels.js'))
 
 .directive('twitterModal', require('./directives/twitter-modal.js'))
 
 .filter('trusted', ['$sce', function ($sce) {
-    return function(url) {
+    return function (url) {
         return $sce.trustAsResourceUrl(url);
     };
 }])
@@ -60,7 +61,7 @@ angular.module('ushahidi.pheme', ['linkify', 'ngtweet'])
                     // process the contents of the theme post type
                     try {
                         $scope.post.featured_tweet = JSON.parse($scope.post.values['theme-featured-tweet'][0]);
-                        $scope.post.featured_tweet.url = "https://twitter.com/" + $scope.post.featured_tweet.userScreenName + "/status/" + $scope.post.featured_tweet.tweetID;
+                        $scope.post.featured_tweet.url = 'https://twitter.com/' + $scope.post.featured_tweet.userScreenName + '/status/' + $scope.post.featured_tweet.tweetID;
                         $scope.post.values['theme-start-date'][0] = new Date($scope.post.values['theme-start-date'][0]);
                         $scope.post.values['theme-last-activity'][0] = new Date($scope.post.values['theme-last-activity'][0]);
                     } catch (e) {

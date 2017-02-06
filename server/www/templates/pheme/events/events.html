@@ -24,6 +24,12 @@
         <div class="main-col">
 
             <!-- Keyword search box -->
+            <div style="font-size: 11px; font-style: italic; padding-bottom: 5px;">
+                <svg class="iconic">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#eye"></use>
+                </svg>
+                Introduce your keywords here to preview the latest results in social media
+            </div>
             <div id="keyword-search" class="input-with-icon">
                 <svg class="iconic">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#magnifying-glass"></use>
@@ -70,20 +76,29 @@
                 </div>
             </div>
 
+            <div style="font-size: 11px; font-style: italic; padding-bottom: 5px;">
+                <svg class="iconic">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#eye"></use>
+                </svg>
+                <span ng-show="showResults != 'live' || liveResults.status != 'loaded'">Create a new topic to load rumours into the dashboard</span>
+                <span ng-show="showResults == 'live' && liveResults.status == 'loaded'">Create a new topic with your keywords to load matching rumours into the dashboard</span>
+            </div>
             <button ng-click="navigateCreate()" class="button button-alpha" translate>pheme.topic.add</button>
 
             <!-- List of topics -->
-            <h2 ng-show="showResults == 'events'">Last active topics ...</h2>
-            <div id="event-listing" class="listing card" ng-class="{'toolbar-active': selectedEvents.length}" ng-show="showResults == 'events'">
+            <h2>Last active topics ...</h2>
+            <div id="event-listing" class="listing card" ng-class="{'toolbar-active': selectedEvents.length}">
                 <div class="alert" ng-hide="events.length">
                     <p ng-hide="events.length"><em translate>pheme.topic.empty</em></p>
                 </div>
 
                 <div id="pheme-{{event.id}}" class="listing-item" ng-repeat="event in events | orderBy:'category_id'" ng-class="{ 'warning': isToggled(event) }" ng-click="toggleEvent(event)">
 
+                    <!--
                     <div class="listing-item-select">
                         <input type="checkbox" value="{{event.id}}" ng-checked="isToggled(event)">
                     </div>
+                    -->
 
                     <div class="listing-item-primary">
                         <h2 class="listing-item-title"><!--<a ng-href="/settings/categories/{{category.id}}">-->{{event.name}}<!--</a>--></h2>

@@ -1,19 +1,29 @@
 <form class="survey-filter">
-    <div class="survey-filter-checkbox init" ng-class="{ checked : (filters.tags.indexOf(category.id) !== -1) }" ng-repeat="category in categories" dropdown>
+    <div class="survey-filter-checkbox init" ng-class="{ checked : isFilterable && (filters.tags.indexOf(category.id) !== -1) }" ng-repeat="category in categories" dropdown>
         <div class="survey-filter-label">
-            <span class="post-band" todo-style="background-color:#A51A1A;"></span>
+            <span class="post-band" ng-class="'topic-color-' + (category.id % 10)"></span>
             <label class="checked">
-                <input type="checkbox" checklist-value="category.id" checklist-model="filters.tags" >
+                <input type="checkbox" checklist-value="category.id" ng-show="isFilterable" checklist-model="filters.tags" >
+                
+                <svg class="iconic" style="fill: #ffffff" ng-show="category.capture_status == 'initialising'"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#loop-circular"></use></svg>
+                <svg class="iconic" style="fill: #ffffff" ng-show="category.capture_status == 'capturing'"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#media-play"></use></svg>
+                <svg class="iconic" style="fill: #ffffff" ng-show="category.capture_status == 'stopped'"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#media-pause"></use></svg>
+
                 {{ ::category.tag }}
             </label>
         </div>
-        <span class="survey-filter-total init" data-toggle="dropdown-menu" dropdown-toggle>
+
+        <!-- non filterable version (only counts) -->
+        <span class="survey-filter-total" ng-unless="isFilterable">{{ category.post_count }}</span>
+
+        <!-- filterable version -->
+        <span class="survey-filter-total init" ng-if="isFilterable" data-toggle="dropdown-menu" dropdown-toggle>
             {{ category.post_count }}
             <svg class="iconic">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#chevron-bottom"></use>
             </svg>
         </span>
-        <ul class="dropdown-menu init" dropdown-menu>
+        <ul class="dropdown-menu init" ng-if="isFilterable" dropdown-menu>
             <li><a translate="post.show_only_form" translate-values="{ form: category.name }" ng-click="showOnly(category.id)">Show only </a></li>
             <li><a translate="post.hide_form" translate-values="{ form: category.name }" ng-click="hide(category.id)">Hide</a></li>
         </ul>

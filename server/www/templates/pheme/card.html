@@ -76,8 +76,7 @@
                    <p class="tweet-result" ng-bind="post.featured_tweet.text" linkify="twitter"><p>
 
                    <p class="tweet-date">{{ post.featured_tweet.date | date:'h:mm a - d MMM y'}}
-                       <a class="tweet-open" ng-href="https://twitter.com/{{ result.userScreenName }}/status/{{ result.tweetID }}" target="_blank">open in twitter</a>
-                       <a ng-click="openTwitterModal()">open modal</a>
+                       <a class="tweet-open" ng-click="openTwitterModal()">open in twitter</a>
                    </p>
 
                </div>
