@@ -13,6 +13,7 @@ PhemeThemeDetailController.$inject = [
     'ModalService',
     'post',
     'theme',
+    'linkify',
     '$log',
     '$q',
     '_'
@@ -30,6 +31,7 @@ function PhemeThemeDetailController(
     ModalService,
     post,
     theme,
+    linkify,
     $log,
     $q,
     _
@@ -77,18 +79,22 @@ function PhemeThemeDetailController(
     angular.extend($scope, Maps.getInitialScope());
     // Load map params, including config from server (async)
     var config = Maps.getAngularScopeParams();
-    config.then(function (params) {
+    var cfg_done = config.then(function (params) {
         angular.extend($scope, params);
         if (theme.locations.authors.length) {
             $scope.mapDataLoaded = true;
+            return true;
         }
+        return false;
     });
 
     // Transform author location data to geojson
     var authorLocations = theme.locations.authors;
     $scope.geojson = {
         onEachFeature: function (feature, layer) {
-            var key = feature.properties.text;
+            var key = '<p class="text">' + feature.properties.text + '</p>';
+            key += '<p class="user">@' + feature.properties.user + '</p>';
+            key = linkify.twitter(key);
             layer.bindPopup(key);
         }
     };
@@ -106,22 +112,35 @@ function PhemeThemeDetailController(
         };
     });
 
-    // Show map once data loaded
-    $q.all({
-        map: leafletData.getMap('post-map'),
-        geojson: leafletData.getGeoJSON('post-map')
-    })
-    // Set map options, add layers, and set bounds
-    .then(function (data) {
-        // Disable 'Leaflet prefix on attributions'
-        data.map.attributionControl.setPrefix(false);
-
-        // Center map on geojson
-        data.map.fitBounds(data.geojson.getBounds());
-        // Avoid zooming further than 15 (particularly when we just have a single point)
-        if (data.map.getZoom() > 15) {
-            data.map.setZoom(15);
+    $scope.$watch('visibleTab', function () {
+        if ($scope.visibleTab !== 'places') {
+            return;
         }
+        // Show map once config loaded
+        $q.all({
+            mapDataLoaded: cfg_done,
+            map: leafletData.getMap('post-map'),
+            geojson: leafletData.getGeoJSON('post-map')
+        })
+        // Set map options, add layers, and set bounds
+        .then(function (data) {
+            if (!data.mapDataLoaded) {
+                return;
+            }
+            // Draw the map after a timeout, to make sure DOM is ready
+            setTimeout(function () {
+                // Disable 'Leaflet prefix on attributions'
+                data.map.attributionControl.setPrefix(false);
+
+                // Center map on geojson
+                data.map.invalidateSize();
+                data.map.fitBounds(data.geojson.getBounds());
+                // Avoid zooming further than 5 (particularly when we just have a single point)
+                if (data.map.getZoom() > 5) {
+                    data.map.setZoom(5);
+                }
+            }, 50);
+        });
     });
 
 }
