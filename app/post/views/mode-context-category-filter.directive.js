@@ -10,6 +10,8 @@ function ModeContextCategoryFilterDirective() {
     };
 }
 
+var _capture_statuses = ['initialising', 'capturing', 'stopped', 'unknown'];
+
 ModeContextCategoryFilter.$inject = ['$scope', 'TagEndpoint', 'PostEndpoint', 'PhemeEventsEndpoint', '$q', '$interval', '$log', '_'];
 function ModeContextCategoryFilter($scope, TagEndpoint, PostEndpoint, PhemeEventsEndpoint, $q, $interval, $log, _) {
     $scope.categories = [];
@@ -56,6 +58,17 @@ function ModeContextCategoryFilter($scope, TagEndpoint, PostEndpoint, PhemeEvent
                     }
                 }
             });
+            // Sort array of categories by capture status then by id
+            categories.sort(function (c1, c2) {
+                var c1_idx = _capture_statuses.indexOf(c1.capture_status);
+                var c2_idx = _capture_statuses.indexOf(c2.capture_status);
+                if (c1_idx - c2_idx > 0) {
+                    return c1_idx - c2_idx;
+                } else {
+                    return c1.id - c2.id;
+                }
+            });
+
             return categories;
 
             // Grab the count for form=null
