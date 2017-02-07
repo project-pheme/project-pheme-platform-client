@@ -91,27 +91,26 @@
                                 <span class="tweet-username">@{{ thread.featured_tweet.user.user_screen_name }}</span>
                             </a>
 
-                            <span class="tweet-verified" ><img src="https://ton.twitter.com/hc_assets/1307051244_737.png" width="18" height="18"><span>
+                            <span class="tweet-verified" ng-if="thread.featured_tweet.user.is_verified" ><img src="https://ton.twitter.com/hc_assets/1307051244_737.png" width="18" height="18"><span>
                         </h2>
 
                         <p class="listing-item-secondary tweet-veracity">
                             <b translate>pheme.pheme.veracity</b>:
 
                             <span ng-if="thread.featured_tweet.veracity_score >= 0.95">
-                                <svg class="iconic confidence">
+                                <svg ng-if="thread.featured_tweet.veracity" class="iconic confidence">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#circle-check"></use>
                                 </svg>
-
-                                {{ thread.featured_tweet.veracity }}
-                                ({{ thread.featured_tweet.veracity_score * 100 | number:0 }}% {{ 'pheme.confidence' | translate }})
-                            </span>
-
-                            <span ng-if="thread.featured_tweet.veracity_score < 0.95">
-                                <svg class="iconic uncertain">
+                                <svg ng-if="!thread.featured_tweet.veracity" class="iconic uncertain">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#circle-x"></use>
                                 </svg>
 
-                                ({{ 'pheme.uncertain' | translate }})
+                                {{ thread.featured_tweet.veracity }}
+                                ({{ thread.featured_tweet.veracity_score * 100 | number:0 }}% <span translate>pheme.pheme.confidence</span>)
+                            </span>
+
+                            <span ng-if="thread.featured_tweet.veracity_score < 0.95">
+                                <span translate>pheme.pheme.uncertain</span>
                             </span>
 
                         </p>
