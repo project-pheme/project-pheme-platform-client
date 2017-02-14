@@ -34,20 +34,40 @@
 
     <div class="listing timeline" ng-class="{ 'toolbar-active' : selectedPosts.length > 0 }">
 
-        <div class="alert confirmation">
-            <p>Showing page <b>{{ currentPage }}</b> of a total of <b>{{ totalItems }}</b> phemes</p>
+        <div ng-hide="isLoading">
+          <div class="alert confirmation">
+              <p>Showing page <b>{{ currentPage }}</b> of a total of <b>{{ totalItems }}</b> phemes</p>
+          </div>
+          <post-card ng-repeat-end
+              ng-repeat="post in posts"
+              can-select="false"
+              post="post"
+              selected-posts="selectedPosts"
+          >
+          </post-card>
+          <div class="list-item" ng-if="posts.length == 0 && hasFilters()">
+              <h4 translate>post.no_search_results</h5>
+          </div>
+
+          <!-- todo: check style -->
+          <div class="list-item" ng-if="posts.length == 0 && !hasFilters()">
+              <h4 translate>post.no_posts_yet</h5>
+          </div>
+
+          <div class="alert confirmation">
+              <p>Showing page <b>{{ currentPage }}</b> of a total of <b>{{ totalItems }}</b> phemes</p>
+          </div>
         </div>
 
-        <!-- todo: group by dates -->
+        <div class="loading" ng-show="isLoading">
+            <!-- loading the document -->
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            <!-- end loading the document -->
+        </div>
 
-        <post-card ng-repeat-end
-            ng-repeat="post in posts"
-            can-select="false"
-            post="post"
-            selected-posts="selectedPosts"
-        >
-        </post-card>
-
+        <!--
         <listing-toolbar
             entities="posts"
             selected-set="selectedPosts"
@@ -60,20 +80,9 @@
                 </button>
                 <collection-toggle-button selected-posts="selectedPosts" posts="posts"></collection-toggle-button>
         </listing-toolbar>
+        -->
 
-        <!-- todo: check style -->
-        <div class="list-item" ng-if="posts.length == 0 && hasFilters()">
-            <h4 translate>post.no_search_results</h5>
-        </div>
-
-        <!-- todo: check style -->
-        <div class="list-item" ng-if="posts.length == 0 && !hasFilters()">
-            <h4 translate>post.no_posts_yet</h5>
-        </div>
-
-        <div class="alert confirmation">
-            <p>Showing page <b>{{ currentPage }}</b> of a total of <b>{{ totalItems }}</b> phemes</p>
-        </div>
+        
 
     </div> <!-- /.listing.timeline -->
 
