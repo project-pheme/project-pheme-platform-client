@@ -18,6 +18,7 @@ PostListController.$inject = [
     '$scope',
     '$q',
     '$translate',
+    '$anchorScroll',
     'PostEndpoint',
     'Notify',
     'PostViewService',
@@ -30,6 +31,7 @@ function PostListController(
     $scope,
     $q,
     $translate,
+    $anchorScroll,
     PostEndpoint,
     Notify,
     PostViewService,
@@ -49,7 +51,10 @@ function PostListController(
     $scope.hasFilters = hasFilters;
     $scope.itemsPerPageChanged = itemsPerPageChanged;
     $scope.userHasBulkActionPermissions = userHasBulkActionPermissions;
-    $scope.pageChanged = getPostsForPagination;
+    $scope.pageChanged = function () {
+        getPostsForPagination();
+        $anchorScroll();
+    };
 
     // sorting controls
     $scope.vOrderbyOptions = [
@@ -62,10 +67,18 @@ function PostListController(
 
     $scope.vOrderbyChanged = function (selection) {
         $scope.filters.v_orderby = selection.value;
+        $scope.setPage(1);
+        $anchorScroll();
     };
 
     $scope.setOrder = function (value) {
         $scope.filters.order = value;
+        $scope.setPage(1);
+        $anchorScroll();
+    };
+
+    $scope.setPage = function (value) {
+        $scope.currentPage = value;
     };
     //
 
