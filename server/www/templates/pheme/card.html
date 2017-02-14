@@ -7,7 +7,7 @@
     <div class="postcard-body">
 
       <header class="postcard-header">
-        <h1 class="postcard-title"><a href="/pheme/themes/{{post.id}}">{{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}} </a></h1>
+        <h1 class="postcard-title"><a href="/pheme/themes/{{post.id}}" target="_blank">{{ post.title || post.content | limitTo:150 }}{{ !post.title && post.content.length > 150 ? ' ...' : ''}} </a></h1>
       </header>
 
       <div class="listing-summary clearfix">
@@ -45,7 +45,7 @@
               <div class="listing-summary-block" ng-if="post.values['theme-most-shared-img'][0] != ''">
                   <h2 class="form-label">Most Shared Image</h2>
                   <a ng-href="{{ post.values['theme-most-shared-img'][0] }}" target="_blank">
-                      <img class="most-shared-image" ng-src="{{ post.values['theme-most-shared-img'][0] }}" width="128" height="128'" style="object-fit: cover;" alt="">
+                      <img class="most-shared-image" ng-src="{{ post.values['theme-most-shared-img'][0] }}" width="128" height="128'" style="object-fit: cover;" alt="" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3.png">
                   </a>
               </div>
           </div>

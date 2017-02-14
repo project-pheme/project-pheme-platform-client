@@ -16,6 +16,7 @@ PhemeThemeDetailController.$inject = [
     'linkify',
     '$log',
     '$q',
+    '$window',
     '_'
 ];
 function PhemeThemeDetailController(
@@ -34,12 +35,14 @@ function PhemeThemeDetailController(
     linkify,
     $log,
     $q,
+    $window,
     _
 ) {
 
     $rootScope.setLayout('layout-c');
     $scope.post = post;
     $scope.theme = theme;
+    $scope.window = $window;
 
     // Set the page title
     $translate('pheme.theme.detail').then(function (title) {
@@ -69,9 +72,13 @@ function PhemeThemeDetailController(
     $scope.current_thread_page = 0;
 
     $scope.openTwitterModal = function (tweetId) {
-        ModalService.openTemplate('<twitter-modal tweetId="' + tweetId + '"></twitter-modal>', '', 'star', $scope, true, true);
+        ModalService.openTemplate('<twitter-modal tweet-id="' + tweetId + '"></twitter-modal>', '', 'star', $scope, true, true);
     };
 
+    // Filter duplicate articles
+    theme.articles = _.uniq(theme.articles, false, function (x) {
+        return x.canonicalUrl.url;
+    });
 
     // MAP rendering
 

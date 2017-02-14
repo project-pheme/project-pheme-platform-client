@@ -122,6 +122,10 @@ function PostFiltersService(_, FormEndpoint, $location, $log) {
                 if (key === 'within_km') {
                     return true;
                 }
+                // Ignore values comparison
+                if (key === 'values') {
+                    return true;
+                }
                 // Is the same as the default?
                 if (_.isEqual(defaults[key], value)) {
                     return true;

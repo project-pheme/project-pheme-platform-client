@@ -55,7 +55,7 @@ angular.module('ushahidi.pheme', ['linkify', 'ngtweet'])
             // Modify the template of the original post card directive
             directive.templateUrl = 'templates/pheme/card.html';
             // Assuming we are dealing with themes, expand that post a little bit
-            directive.controller = ['$scope', 'PhemePostViewService', 'TagEndpoint', 'ModalService', function ($scope, PhemePostViewService, TagEndpoint, ModalService) {
+            directive.controller = ['$scope', 'PhemePostViewService', 'TagEndpoint', 'ModalService', '$log', function ($scope, PhemePostViewService, TagEndpoint, ModalService, $log) {
                 $scope.postType = PhemePostViewService.getPostType();
                 if ($scope.postType === 'themes') {
                     // process the contents of the theme post type
@@ -72,7 +72,7 @@ angular.module('ushahidi.pheme', ['linkify', 'ngtweet'])
                     $scope.post.tags[0].$t = tag;
                 });
                 $scope.openTwitterModal = function () {
-                    ModalService.openTemplate('<twitter-modal tweetId="' + $scope.post.featured_tweet.id + '"></twitter-modal>', '', 'star', $scope, true, true);
+                    ModalService.openTemplate('<twitter-modal tweet-id="' + $scope.post.featured_tweet.tweet_id + '"></twitter-modal>', '', 'star', $scope, true, true);
                 };
             }];
             return $delegate;

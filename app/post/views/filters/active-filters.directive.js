@@ -69,6 +69,11 @@ function ActiveFilters($translate, $filter, PostFilters, _, TagEndpoint, RoleEnd
                 delete activeFilters.order;
             }
 
+            // Pheme: Handle value filters
+            if (activeFilters.values) {
+                delete activeFilters.values;
+            }
+
             // Remove form filter as its shown by the mode-context-form-filter already
             delete activeFilters.form;
 
