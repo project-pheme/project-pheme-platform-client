@@ -9,6 +9,7 @@ function RangeSelectDirective() {
             max: '=',
             label: '=',
             name: '=',
+            step: '=',
             value: '=',
             unit: '='
         },
@@ -19,4 +20,6 @@ function RangeSelectDirective() {
 
 RangeSelectController.$inject = ['$scope'];
 function RangeSelectController($scope) {
+    /* Oh lord, please forgive this ugly hack, for the deadlines are close */
+    $scope.isControversiality = ($scope.name === 'filter_controversiality');
 }

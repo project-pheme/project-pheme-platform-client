@@ -3,8 +3,9 @@
 
     <div class="form-field">
         <label>
-            <input type="range" min="{{ min }}" max="{{ max }}" name="{{ name }}" ng-model="value">
-            <span ng-bind="value"></span> {{ unit }}
+            <input type="range" min="{{ min }}" max="{{ max }}" step="{{ step }}" name="{{ name }}" ng-model="value">
+            <span ng-if="isControversiality" ng-bind="value | controversialityThresholdToString"></span>
+            <span ng-if="!isControversiality" ng-bind="value"></span> {{ unit }}
         </label>
     </div>
 </fieldset>

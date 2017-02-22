@@ -70,13 +70,13 @@ function FilterPostsController($scope, $timeout) {
     // Indirect binding of filter values to the filter set
 
     $scope.filter_values = {
-        controversiality: 0,
+        controversiality: -33,
         avg_activity: 0,
         size : 2
     };
 
     $scope.filters.values = {
-        'theme-controversiality': JSON.stringify({ op: '>=', term: 0.00}),
+        'theme-controversiality': JSON.stringify({ op: '>=', term: -0.33}),
         'theme-average-activity': JSON.stringify({ op: '>=', term: 0.00}),
         'theme-size': JSON.stringify({ op: '>=', term: 2})
     };
@@ -89,4 +89,5 @@ function FilterPostsController($scope, $timeout) {
         $scope.filters.values['theme-size'] =
             JSON.stringify({ op: '>=', term: $scope.filter_values.size });
     };
+
 }

@@ -20,14 +20,17 @@
                     <p><b translate>pheme.pheme.number_publications</b>: {{ post.values['theme-pub-count'][0] }}</p>
                     <p><b translate>pheme.pheme.verified_authors</b>: {{ post.values['theme-verified-count'][0] > 0 ? "Yes" : "No" }} </p>
                     <p><b translate>pheme.pheme.controversiality</b>:
-                        <span class="green" ng-if="post.values['theme-controversiality'][0] < 0.33">
-                            <b>{{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</b>
+                        <span class="grey" ng-if="post.values['theme-controversiality'][0] < 0">
+                            N/A
                         </span>
-                        <span class="yellow" ng-if="post.values['theme-controversiality'][0] >= 0.33 && post.values['theme-controversiality'][0] < 0.67">
-                            <b>{{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</b>
+                        <span class="green" ng-if="post.values['theme-controversiality'][0] >= 0 && post.values['theme-controversiality'][0] < 0.33">
+                            <b>Low</b>
                         </span>
-                        <span class="red" ng-if="post.values['theme-controversiality'][0] >= 0.67">
-                            <b>{{ post.values['theme-controversiality'][0] * 100 | number:0 }}%</b>
+                        <span class="yellow" ng-if="post.values['theme-controversiality'][0] >= 0.33 && post.values['theme-controversiality'][0] < 0.66">
+                            <b>Medium</b>
+                        </span>
+                        <span class="red" ng-if="post.values['theme-controversiality'][0] >= 0.66">
+                            <b>High</b>
                         </span>
                     </p>
               </div>

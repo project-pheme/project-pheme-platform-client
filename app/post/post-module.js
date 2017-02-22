@@ -50,6 +50,20 @@ angular.module('ushahidi.posts', [])
 // @todo move elsewhere? Used in post-view and activity
 .directive('postViewUnavailable', require('./views/post-view-unavailable.directive.js'))
 
+.filter('controversialityThresholdToString', function () {
+    return function (input) {
+        if (input < 0) {
+            return 'All';
+        } else if (input < 33) {
+            return 'Low';
+        } else if (input < 66) {
+            return 'Medium';
+        } else {
+            return 'High';
+        }
+    };
+})
+
 .config(require('./post-routes.js'))
 
 .run(['$window', function ($window) {

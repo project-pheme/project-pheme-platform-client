@@ -79,7 +79,7 @@ function PostFiltersService(_, FormEndpoint, $location, $log) {
             form: _.pluck(forms, 'id'),
             set: [],
             user: false,
-            v_orderby: 'theme-controversiality',
+            v_orderby: 'theme-size',
             order: 'desc'
         };
     }
