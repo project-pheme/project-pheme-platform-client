@@ -69,6 +69,24 @@
                                 <b>High</b>
                             </span>
                         </p>
+                        <p class="tweet-veracity">
+                            <b translate>pheme.pheme.veracity</b>:
+                            <span ng-if="post.values['theme-veracity-score'][0] >= 0.95">
+                                <svg ng-if="(post.values['theme-veracity'][0] | lowercase) == 'true'" class="iconic confidence">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#circle-check"></use>
+                                </svg>
+                                <svg ng-if="(post.values['theme-veracity'][0] | lowercase) == 'false'" class="iconic uncertain">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../../img/iconic-sprite.svg#circle-x"></use>
+                                </svg>
+
+                                {{ post.values['theme-veracity'][0] }}
+                                ({{ post.values['theme-veracity-score'][0] * 100 | number:0 }}% <span translate>pheme.pheme.confidence</span>)
+                            </span>
+
+                            <span ng-if="post.values['theme-veracity-score'][0] < 0.95">
+                                <span translate>pheme.pheme.uncertain</span>
+                            </span>
+                        </p>
                     </div>
 
                     <div class="listing-summary-block">
@@ -104,7 +122,7 @@
                             <span class="tweet-verified" ng-if="thread.featured_tweet.user.is_verified" ><img src="https://ton.twitter.com/hc_assets/1307051244_737.png" width="18" height="18"><span>
                         </h2>
 
-                        <p class="listing-item-secondary tweet-veracity">
+                        <!-- <p class="listing-item-secondary tweet-veracity">
                             <b translate>pheme.pheme.veracity</b>:
 
                             <span ng-if="thread.featured_tweet.veracity_score >= 0.95">
@@ -123,7 +141,7 @@
                                 <span translate>pheme.pheme.uncertain</span>
                             </span>
 
-                        </p>
+                        </p> -->
 
                         <p ng-bind="thread.featured_tweet.text" linkify="twitter"><p>
 
