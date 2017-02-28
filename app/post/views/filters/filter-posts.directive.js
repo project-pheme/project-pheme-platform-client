@@ -13,8 +13,8 @@ function FilterPostsDirective() {
     };
 }
 
-FilterPostsController.$inject = ['$scope', '$timeout'];
-function FilterPostsController($scope, $timeout) {
+FilterPostsController.$inject = ['$scope', '$timeout', '$rootScope'];
+function FilterPostsController($scope, $timeout, $rootScope) {
     $scope.searchSavedToggle = false;
     $scope.searchFiltersToggle = false;
     $scope.cancel = cancel;
@@ -68,20 +68,16 @@ function FilterPostsController($scope, $timeout) {
     }
 
     // Indirect binding of filter values to the filter set
-
     $scope.filter_values = {
         controversiality: -33,
         avg_activity: 0,
         size : 2
     };
 
-    $scope.filters.values = {
-        'theme-controversiality': JSON.stringify({ op: '>=', term: -0.33}),
-        'theme-average-activity': JSON.stringify({ op: '>=', term: 0.00}),
-        'theme-size': JSON.stringify({ op: '>=', term: 2})
-    };
-
     $scope.applyValueFilters = function () {
+        if ($scope.filters.values === undefined) {
+            $scope.filters.values = {};
+        }
         $scope.filters.values['theme-controversiality'] =
             JSON.stringify({ op: '>=', term: $scope.filter_values.controversiality / 100 });
         $scope.filters.values['theme-average-activity'] =
@@ -89,5 +85,15 @@ function FilterPostsController($scope, $timeout) {
         $scope.filters.values['theme-size'] =
             JSON.stringify({ op: '>=', term: $scope.filter_values.size });
     };
+
+    $scope.applyValueFilters(); // initialise actual filters that get sent to the API
+
+    /* @todo: this is probably not great */
+    $rootScope.clearValueFilters = function () {
+        $scope.filter_values.controversiality = -33;
+        $scope.filter_values.avg_activity = 0;
+        $scope.filter_values.size = 2;
+    };
+    $rootScope.applyValueFilters = $scope.applyValueFilters;
 
 }

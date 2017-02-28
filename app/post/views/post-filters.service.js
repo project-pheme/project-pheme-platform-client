@@ -1,10 +1,17 @@
 module.exports = PostFiltersService;
 
-PostFiltersService.$inject = ['_', 'FormEndpoint', '$location', '$log'];
-function PostFiltersService(_, FormEndpoint, $location, $log) {
+PostFiltersService.$inject = ['_', 'FormEndpoint', '$location', '$rootScope', '$log'];
+function PostFiltersService(_, FormEndpoint, $location, $rootScope, $log) {
     // Create initial filter state
     var filterState = window.filterState = getDefaults();
     var forms = [];
+
+    // @todo this duplicates with filter-posts.directive.js and active-filters.directive.js
+    var defaultFilterValues = {
+        controversiality: JSON.stringify({ op: '>=', term: -33 / 100 }),
+        avg_activity: JSON.stringify({ op: '>=', term: 0 }),
+        size: JSON.stringify({ op: '>=', term: 2 })
+    };
 
     // @todo take this out of the service
     // but ensure it happens at the right times
@@ -54,11 +61,19 @@ function PostFiltersService(_, FormEndpoint, $location, $log) {
     }
 
     function clearFilters() {
-        return angular.copy(getDefaults(), filterState);
+        var x = angular.copy(getDefaults(), filterState);
+        /* From filter-posts.directive.js */
+        $rootScope.clearValueFilters();
+        $rootScope.applyValueFilters();
+        return x;
     }
 
     function clearFilter(filterKey, value) {
-        if (angular.isArray(filterState[filterKey])) {
+        if (filterKey == 'values') {
+            /* From filter-posts.directive.js */
+            $rootScope.clearValueFilters();
+            $rootScope.applyValueFilters();
+        } else if (angular.isArray(filterState[filterKey])) {
             filterState[filterKey] = _.without(filterState[filterKey], value);
         } else {
             filterState[filterKey] = getDefaults()[filterKey];
@@ -122,8 +137,23 @@ function PostFiltersService(_, FormEndpoint, $location, $log) {
                 if (key === 'within_km') {
                     return true;
                 }
-                // Ignore values comparison
+                if (key === 'v_orderby') {
+                    return true;
+                }
+                if (key === 'order') {
+                    return true;
+                }
+                // Values comparison
                 if (key === 'values') {
+                    if (value['theme-controversiality'] !== defaultFilterValues.controversiality) {
+                        return false;
+                    }
+                    if (value['theme-average-activity'] !== defaultFilterValues.avg_activity) {
+                        return false;
+                    }
+                    if (value['theme-size'] !== defaultFilterValues.size) {
+                        return false;
+                    }
                     return true;
                 }
                 // Is the same as the default?

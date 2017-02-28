@@ -14,6 +14,13 @@ function ActiveFilters($translate, $filter, PostFilters, _, TagEndpoint, RoleEnd
         $scope.removeFilter = removeFilter;
         $scope.transformFilterValue = transformFilterValue;
 
+        // @todo this duplicates with filter-posts.directive.js and post-filters.service.js
+        var defaultFilterValues = {
+            controversiality: JSON.stringify({ op: '>=', term: -33 / 100 }),
+            avg_activity: JSON.stringify({ op: '>=', term: 0 }),
+            size: JSON.stringify({ op: '>=', term: 2 })
+        };
+
         var rawFilters = {};
         var tags = [];
         var roles = [];
@@ -71,7 +78,12 @@ function ActiveFilters($translate, $filter, PostFilters, _, TagEndpoint, RoleEnd
 
             // Pheme: Handle value filters
             if (activeFilters.values) {
-                delete activeFilters.values;
+                var value = activeFilters.values;
+                if (value['theme-controversiality'] === defaultFilterValues.controversiality && 
+                        value['theme-average-activity'] === defaultFilterValues.avg_activity &&
+                        value['theme-size'] === defaultFilterValues.size) {
+                    delete activeFilters.values;
+                }
             }
 
             // Remove form filter as its shown by the mode-context-form-filter already
