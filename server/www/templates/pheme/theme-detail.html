@@ -107,7 +107,7 @@
                 <div class="listing tweet">
                     <div class="listing-item">
 
-                      <div class="listing-item-primary tweet card" ng-repeat="thread in theme.threads | startFrom:current_thread_page*5 | limitTo:5">
+                      <div class="listing-item-primary tweet card" ng-repeat="thread in theme.threads | startFrom:(current_thread_page-1)*5 | limitTo:5">
 
                         <div class="listing-item-image">
                             <img class="avatar" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
@@ -151,7 +151,7 @@
 
                       </div>
 
-                      <uib-pagination ng-model="current_thread_page" items-per-page="10" total-items="theme.threads.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
+                      <uib-pagination ng-model="current_thread_page" items-per-page="5" total-items="theme.threads.length" max-size="5" boundary-links="false" rotate="false"></uib-pagination>
 
                     </div>
                 </div>

@@ -69,7 +69,7 @@ function PhemeThemeDetailController(
     (theme.threads || []).forEach(function (thread) {
         thread.featured_tweet.veracity_score = parseFloat(thread.featured_tweet.veracity_score || '0.0');
     });
-    $scope.current_thread_page = 0;
+    $scope.current_thread_page = 1;
 
     $scope.openTwitterModal = function (tweetId) {
         ModalService.openTemplate('<twitter-modal tweet-id="' + tweetId + '"></twitter-modal>', '', 'star', $scope, true, true);
