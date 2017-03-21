@@ -63,6 +63,17 @@ function (
 
         _.each(keywords, function (kw) {
             event_obj.dataSources.push({
+                reddit: {
+                    keywords: kw,
+                    redditType: 'subreddit',
+                    subreddits: [
+                        'worldnews',
+                        'switzerland'
+                    ],
+                    type: 'reddit'
+                }
+            });
+            event_obj.dataSources.push({
                 twitter: {
                     type: 'Twitter',
                     keywords: kw

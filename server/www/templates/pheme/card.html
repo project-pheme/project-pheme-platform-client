@@ -84,11 +84,16 @@
                <div class="listing-item-primary tweet">
 
                    <div class="listing-item-image">
-                       <img class="avatar" ng-src="{{ post.featured_tweet.user.profile_image_url }}" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" alt="">
+                       <img ng-if="post.source_type == 'twitter'" class="avatar" ng-src="{{ post.featured_tweet.user.profile_image_url }}" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" alt="">
+                       <img ng-if="post.source_type != 'twitter'" class="avatar" ng-src="/img/reddit.png" alt="">
                    </div>
 
                    <h2 class="listing-item-title">
-                       <a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">
+                       <a ng-if="post.source_type == 'twitter'" ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">
+                           <span class="tweet-name">{{ post.featured_tweet.user.name }}</span>
+                           <span class="tweet-username">@{{ post.featured_tweet.user.user_screen_name }}</span>
+                       </a>
+                       <a ng-if="post.source_type == 'reddit'" ng-href="https://www.reddit.com/user/{{ post.featured_tweet.user.user_screen_name }}">
                            <span class="tweet-name">{{ post.featured_tweet.user.name }}</span>
                            <span class="tweet-username">@{{ post.featured_tweet.user.user_screen_name }}</span>
                        </a>
@@ -98,7 +103,7 @@
                    <p class="tweet-result" ng-bind="post.featured_tweet.text" linkify="twitter"><p>
 
                    <p class="tweet-date">{{ post.featured_tweet.date | date:'h:mm a - d MMM y'}}
-                       <a class="tweet-open" ng-click="openTwitterModal()">open in twitter</a>
+                       <a ng-if="post.source_type == 'twitter'" class="tweet-open" ng-click="openTwitterModal()">open in twitter</a>
                    </p>
 
                </div>

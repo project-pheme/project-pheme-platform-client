@@ -62,6 +62,7 @@ angular.module('ushahidi.pheme', ['linkify', 'ngtweet'])
                     try {
                         $scope.post.featured_tweet = JSON.parse($scope.post.values['theme-featured-tweet'][0]);
                         $scope.post.featured_tweet.url = 'https://twitter.com/' + $scope.post.featured_tweet.userScreenName + '/status/' + $scope.post.featured_tweet.tweetID;
+                        $scope.post.source_type = $scope.post.values['theme-source-type'][0].toLowerCase();
                         $scope.post.values['theme-start-date'][0] = new Date($scope.post.values['theme-start-date'][0]);
                         $scope.post.values['theme-last-activity'][0] = new Date($scope.post.values['theme-last-activity'][0]);
                     } catch (e) {

@@ -110,11 +110,16 @@
                       <div class="listing-item-primary tweet card" ng-repeat="thread in theme.threads | startFrom:(current_thread_page-1)*5 | limitTo:5">
 
                         <div class="listing-item-image">
-                            <img class="avatar" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
+                            <img ng-if="thread.values['theme-source-type'][0].toLowerCase() == 'twitter'" class="avatar" sr-fallback="//pbs.twimg.com/profile_images/2284174872/7df3h38zabcvjylnyfe3_bigger.png" ng-src="{{ thread.featured_tweet.user.profile_image_url }}" alt="">
+                            <img ng-if="thread.values['theme-source-type'][0].toLowerCase() != 'twitter'" class="avatar" ng-src="/img/reddit.png" alt="">
                         </div>
 
                         <h2 class="listing-item-title">
-                            <a ng-href="https://twitter.com/{{ post.featured_tweet.user.user_screen_name }}">
+                            <a ng-if="thread.values['theme-source-type'][0].toLowerCase() == 'twitter'" ng-href="https://twitter.com/{{ thread.featured_tweet.user.user_screen_name }}">
+                                <span class="tweet-name" ng-bind="thread.featured_tweet.user.user_description"></span>
+                                <span class="tweet-username">@{{ thread.featured_tweet.user.user_screen_name }}</span>
+                            </a>
+                            <a ng-if="thread.values['theme-source-type'][0].toLowerCase() != 'twitter'" ng-href="https://www.reddit.com/user/{{ thread.featured_tweet.user.user_screen_name }}">
                                 <span class="tweet-name" ng-bind="thread.featured_tweet.user.user_description"></span>
                                 <span class="tweet-username">@{{ thread.featured_tweet.user.user_screen_name }}</span>
                             </a>
@@ -146,7 +151,7 @@
                         <p ng-bind="thread.featured_tweet.text" linkify="twitter"><p>
 
                         <p class="tweet-date">{{ thread.featured_tweet.date | date:'h:mm a - d MMM y' }}
-                            <a class="tweet-open" ng-click="openTwitterModal(thread.featured_tweet.tweet_id)" target="_blank">open in twitter</a>
+                            <a ng-if="thread.values['theme-source-type'][0].toLowerCase() == 'twitter'" class="tweet-open" ng-click="openTwitterModal(thread.featured_tweet.tweet_id)" target="_blank">open in twitter</a>
                         </p>
 
                       </div>
