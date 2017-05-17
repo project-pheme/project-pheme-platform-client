@@ -45,7 +45,7 @@
                             </svg>
 
                             {{ post.values['theme-veracity'][0] }}
-                            ({{ post.values['theme-veracity-score'][0] * 100 | number:0 }}% <span translate>pheme.pheme.confidence</span>)
+                            ({{ [ (post.values['theme-veracity-score'][0] * 100 | number:0), 95 ] | min }}% <span translate>pheme.pheme.confidence</span>)
                         </span>
 
                         <span ng-if="post.values['theme-veracity-score'][0] < 0.95">
