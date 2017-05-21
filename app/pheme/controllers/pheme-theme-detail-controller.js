@@ -61,6 +61,11 @@ function PhemeThemeDetailController(
     $scope.post.values['theme-start-date'][0] = new Date($scope.post.values['theme-start-date'][0]);
     $scope.post.values['theme-last-activity'][0] = new Date($scope.post.values['theme-last-activity'][0]);
 
+    $scope.msg_units = 'messages';
+    if ($scope.post.source_type === 'twitter') {
+        $scope.msg_units = 'tweets';
+    }
+
     $scope.visibleTab = 'threads';
     $scope.setVisibleTab = function (tabId) {
         $scope.visibleTab = tabId;

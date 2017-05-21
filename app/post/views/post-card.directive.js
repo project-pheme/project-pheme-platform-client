@@ -20,6 +20,12 @@ function PostCardDirective() {
                 // loadForm($scope.post.form);
             }
 
+            $scope.msg_units = 'messages';
+            if ($scope.post && $scope.post.source_type && $scope.post.source_type === 'twitter') {
+                $scope.msg_units = 'tweets';
+            }
+  
+
             /* function loadForm(form) {
                 // Replace form with full object
                 if (form) {
